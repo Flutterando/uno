@@ -1,6 +1,6 @@
 name: uno
 description: Future based HTTP client for the Dart and Flutter
-version: 1.0.0+3
+version: 1.0.0+4
 homepage: https://github.com/Flutterando/uno.git
 
 environment:
