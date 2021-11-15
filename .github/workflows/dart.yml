@@ -11,7 +11,7 @@ on:
       - master
 jobs:
   uno:
-    name: flutter modular
+    name: uno
     runs-on: ubuntu-latest
     
     steps:
