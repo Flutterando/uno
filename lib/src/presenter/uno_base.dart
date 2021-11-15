@@ -7,7 +7,7 @@ import 'package:characters/characters.dart';
 import 'package:uno/src/presenter/interceptors.dart';
 
 abstract class Uno {
-  String get baseUrl;
+  String get baseURL;
   Duration get timeout;
   Map<String, String> get headers;
   Interceptors get interceptors;
@@ -16,14 +16,14 @@ abstract class Uno {
   InjectContext get context;
 
   factory Uno({
-    String baseUrl = '',
+    String baseURL = '',
     Map<String, String> headers = const {},
     Duration timeout = const Duration(seconds: 30),
   }) =>
-      _Uno(baseUrl: baseUrl, headers: headers, timeout: timeout);
+      _Uno(baseURL: baseURL, headers: headers, timeout: timeout);
 
-  FutureOr<Response> call(
-    String url, {
+  Future<Response> call({
+    required String url,
     String method = 'get',
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -32,7 +32,7 @@ abstract class Uno {
     dynamic data,
   });
 
-  FutureOr<Response> get(
+  Future<Response> get(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -40,16 +40,7 @@ abstract class Uno {
     void Function(int total, int current)? onDownloadProgress,
   });
 
-  FutureOr<Response> post(
-    String url, {
-    Map<String, String> params = const {},
-    Map<String, String> headers = const {},
-    ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
-    dynamic data,
-  });
-
-  FutureOr<Response> put(
+  Future<Response> post(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -58,15 +49,7 @@ abstract class Uno {
     dynamic data,
   });
 
-  FutureOr<Response> delete(
-    String url, {
-    Map<String, String> params = const {},
-    Map<String, String> headers = const {},
-    ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
-  });
-
-  FutureOr<Response> patch(
+  Future<Response> put(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -75,7 +58,24 @@ abstract class Uno {
     dynamic data,
   });
 
-  FutureOr<Response> head(
+  Future<Response> delete(
+    String url, {
+    Map<String, String> params = const {},
+    Map<String, String> headers = const {},
+    ResponseType responseType = ResponseType.json,
+    void Function(int total, int current)? onDownloadProgress,
+  });
+
+  Future<Response> patch(
+    String url, {
+    Map<String, String> params = const {},
+    Map<String, String> headers = const {},
+    ResponseType responseType = ResponseType.json,
+    void Function(int total, int current)? onDownloadProgress,
+    dynamic data,
+  });
+
+  Future<Response> head(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -91,7 +91,7 @@ class _Uno implements Uno {
   final Duration timeout;
 
   @override
-  final String baseUrl;
+  final String baseURL;
 
   @override
   final Map<String, String> headers;
@@ -103,13 +103,13 @@ class _Uno implements Uno {
   final interceptors = Interceptors();
 
   _Uno({
-    required this.baseUrl,
+    required this.baseURL,
     required this.headers,
     required this.timeout,
   }) : context = InjectContext.defaultConfig();
 
   @override
-  FutureOr<Response> get(
+  Future<Response> get(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -117,7 +117,7 @@ class _Uno implements Uno {
     void Function(int total, int current)? onDownloadProgress,
   }) {
     return call(
-      url,
+      url: url,
       method: 'get',
       params: params,
       headers: headers,
@@ -127,7 +127,7 @@ class _Uno implements Uno {
   }
 
   @override
-  FutureOr<Response> delete(
+  Future<Response> delete(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -135,7 +135,7 @@ class _Uno implements Uno {
     void Function(int total, int current)? onDownloadProgress,
   }) {
     return call(
-      url,
+      url: url,
       method: 'delete',
       params: params,
       headers: headers,
@@ -145,7 +145,7 @@ class _Uno implements Uno {
   }
 
   @override
-  FutureOr<Response> head(
+  Future<Response> head(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -153,7 +153,7 @@ class _Uno implements Uno {
     void Function(int total, int current)? onDownloadProgress,
   }) {
     return call(
-      url,
+      url: url,
       method: 'head',
       params: params,
       headers: headers,
@@ -163,7 +163,7 @@ class _Uno implements Uno {
   }
 
   @override
-  FutureOr<Response> patch(
+  Future<Response> patch(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -172,7 +172,7 @@ class _Uno implements Uno {
     dynamic data,
   }) {
     return call(
-      url,
+      url: url,
       method: 'patch',
       params: params,
       headers: headers,
@@ -183,7 +183,7 @@ class _Uno implements Uno {
   }
 
   @override
-  FutureOr<Response> post(
+  Future<Response> post(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -192,7 +192,7 @@ class _Uno implements Uno {
     dynamic data,
   }) {
     return call(
-      url,
+      url: url,
       method: 'post',
       params: params,
       headers: headers,
@@ -203,7 +203,7 @@ class _Uno implements Uno {
   }
 
   @override
-  FutureOr<Response> put(
+  Future<Response> put(
     String url, {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -212,7 +212,7 @@ class _Uno implements Uno {
     dynamic data,
   }) {
     return call(
-      url,
+      url: url,
       method: 'put',
       params: params,
       headers: headers,
@@ -223,8 +223,8 @@ class _Uno implements Uno {
   }
 
   @override
-  FutureOr<Response> call(
-    String url, {
+  Future<Response> call({
+    required String url,
     String method = 'get',
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
@@ -232,7 +232,7 @@ class _Uno implements Uno {
     void Function(int total, int current)? onDownloadProgress,
     dynamic data,
   }) async {
-    url = '$baseUrl$url${_encodeParamsToQueries(params)}';
+    url = '$baseURL$url${_encodeParamsToQueries(params)}';
 
     final _headers = <String, String>{}
       ..addAll(this.headers)

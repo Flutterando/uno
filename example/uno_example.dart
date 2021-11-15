@@ -11,7 +11,9 @@ void main() async {
   // final response = await uno.get('https://jsonplaceholder.typicode.com/todos');
   // print(response.data);
 
-  final uno = Uno();
+  final uno = Uno(
+    baseURL: '',
+  );
   uno.interceptors.request.use((request) {
     request.headers['test'] = 'test';
     return request;
@@ -22,14 +24,15 @@ void main() async {
   // final response = await uno.post('http://localhost:3000/form', data: formData);
   // print(response.data);
 
-  final response = await uno.get(
-    'http://localhost:3000/public/slidy.tar',
+  await uno(
+    method: 'get',
+    url: 'http://bit.ly/2mTM3nY',
     responseType: ResponseType.arraybuffer,
     onDownloadProgress: (total, current) {
       final percentCompleted = (current / total * 100).round();
       print('completed: $percentCompleted%');
     },
-  );
-  await File('image.png').writeAsBytes(response.data);
-  exit(0);
+  ).then((response) async {
+    await File('ada_lovelace.jpg').writeAsBytes(response.data);
+  });
 }
