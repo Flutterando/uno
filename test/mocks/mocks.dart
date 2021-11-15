@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:mocktail/mocktail.dart';
 import 'package:universal_io/io.dart';
 import 'package:uno/src/domain/domain.dart';
+import 'package:uno/src/infra/infra.dart';
 
 export 'package:mocktail/mocktail.dart';
 
@@ -12,13 +15,22 @@ class ResponseMock extends Mock implements Response {}
 
 class HttpClientMock extends Mock implements HttpClient {}
 
+class HttpDatasourceMock extends Mock implements HttpDatasource {}
+
 class HttpClientRequestMock extends Mock implements HttpClientRequest {}
 
-class HttpClientResponseMock extends Mock implements HttpClientResponse {}
+class HttpClientResponseMock extends Mock implements HttpClientResponse {
+  @override
+  Stream<S> transform<S>(StreamTransformer<List<int>, S> streamTransformer) {
+    return streamTransformer.bind(Stream.value(utf8.encode(stringJsonMock)));
+  }
+}
 
 class HttpHeadersMock extends Mock implements HttpHeaders {
   @override
-  void forEach(void Function(String name, List<String> values) action) {}
+  void forEach(void Function(String name, List<String> values) action) {
+    action('test', ['test']);
+  }
 }
 
 class UnoErrorMock extends Mock implements UnoError {}

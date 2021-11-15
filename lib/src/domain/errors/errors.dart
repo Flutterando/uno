@@ -6,5 +6,5 @@ abstract class UnoError implements Exception {
   final StackTrace? stackTrace;
   final Request? request;
 
-  UnoError(this.message, {this.data, this.stackTrace, this.request});
+  const UnoError(this.message, {this.data, this.stackTrace, this.request});
 }

@@ -62,7 +62,7 @@ class UniversalHttpClient implements HttpDatasource {
       await for (var item in mainStream.transform(utf8.decoder)) {
         buffer.write(item);
       }
-      return jsonDecode(buffer.toString());
+      return buffer.toString();
     } else if (responseType == ResponseType.arraybuffer) {
       var bytes = <int>[];
       await for (var b in mainStream) {

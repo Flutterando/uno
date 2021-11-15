@@ -21,5 +21,6 @@ void main() {
   test('inject context default config', () async {
     final context = InjectContext.defaultConfig();
     expect(context.get<Fetch>(), isA<FetchImpl>());
+    context.clear();
   });
 }
