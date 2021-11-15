@@ -159,13 +159,13 @@ uno.interceptors.request.use((request) {
 ```dart
 uno.get('/user/12345')
   .catchError((error) {
-    if (error.response) {
+    if (error.response != null) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
       print(error.response.data);
       print(error.response.status);
       print(error.response.headers);
-    } else if (error.request) {
+    } else if (error.request != null) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
