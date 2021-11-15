@@ -49,33 +49,6 @@ class FormData {
     addBytes(name, io.File(filePath).readAsBytesSync(), filename: filename, contentType: contentType);
   }
 
-  /// Returns value of a first field named [name] or null if no fields were found.
-  String? get(String name) {
-    var bytes = getBytes(name);
-    return bytes != null ? encoding.decode(bytes) : null;
-  }
-
-  /// Returns bytes of a first field named [name] or null if no fields were found.
-  List<int>? getBytes(String name) {
-    var matchedEntries = _entries.where((entry) => encoding.decode(entry.name) == name);
-
-    if (matchedEntries.isEmpty) {
-      return null;
-    }
-
-    return matchedEntries.first.value.bytes;
-  }
-
-  /// Returns list of bytes of fields named [name].
-  List<List<int>> getAllBytes(String name) {
-    return _entries.where((entry) => encoding.decode(entry.name) == name).map((entry) => entry.value.bytes).toList();
-  }
-
-  /// Returns list of values of fields named [name].
-  List<String> getAll(String name) {
-    return getAllBytes(name).map((bytes) => encoding.decode(bytes)).toList();
-  }
-
   bool _isDirty = true;
   FormDataResult? _lastResult;
 

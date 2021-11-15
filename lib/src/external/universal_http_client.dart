@@ -11,43 +11,51 @@ class UniversalHttpClient implements HttpDatasource {
   @override
   Future<Response> fetch(Request unoRequest) async {
     client.connectionTimeout = unoRequest.timeout;
+    try {
+      final request = await client.openUrl(unoRequest.method, unoRequest.uri);
 
-    final request = await client.openUrl(unoRequest.method, unoRequest.uri);
+      for (var key in unoRequest.headers.keys) {
+        request.headers.set(key, unoRequest.headers[key]!);
+      }
 
-    for (var key in unoRequest.headers.keys) {
-      request.headers.set(key, unoRequest.headers[key]!);
+      request.add(unoRequest.bodyBytes);
+      final response = await request.close();
+
+      unoRequest.onDownloadProgress?.call(response.contentLength, 0);
+      var totalbytes = 0;
+      final mainStream = response.transform<List<int>>(
+        StreamTransformer.fromHandlers(
+          handleData: (value, sink) {
+            totalbytes += value.length;
+            unoRequest.onDownloadProgress?.call(response.contentLength, totalbytes);
+            sink.add(value);
+          },
+        ),
+      );
+
+      var data = await _convertResponseData(mainStream, unoRequest.responseType);
+
+      final headers = <String, String>{};
+
+      response.headers.forEach((key, values) {
+        headers[key] = values.join(',');
+      });
+
+      final unoResponse = Response(
+        request: unoRequest,
+        status: response.statusCode,
+        data: data,
+        headers: headers,
+      );
+      return unoResponse;
+    } on SocketException catch (e, s) {
+      throw UnoError<SocketException>(
+        e.toString().replaceFirst('SocketException', ''),
+        stackTrace: s,
+        request: unoRequest,
+        data: e,
+      );
     }
-
-    request.add(unoRequest.bodyBytes);
-    final response = await request.close();
-
-    unoRequest.onDownloadProgress?.call(response.contentLength, 0);
-    var totalbytes = 0;
-    final mainStream = response.transform<List<int>>(
-      StreamTransformer.fromHandlers(
-        handleData: (value, sink) {
-          totalbytes += value.length;
-          unoRequest.onDownloadProgress?.call(response.contentLength, totalbytes);
-          sink.add(value);
-        },
-      ),
-    );
-
-    var data = await _convertResponseData(mainStream, unoRequest.responseType);
-
-    final headers = <String, String>{};
-
-    response.headers.forEach((key, values) {
-      headers[key] = values.join(',');
-    });
-
-    final unoResponse = Response(
-      request: unoRequest,
-      status: response.statusCode,
-      data: data,
-      headers: headers,
-    );
-    return unoResponse;
   }
 
   dynamic _convertResponseData(Stream<List<int>> mainStream, ResponseType responseType) async {

@@ -11,6 +11,18 @@ class FetchImpl implements Fetch {
 
   @override
   FetchCallback call({required Request request}) async {
-    return await repository.fetch(request: request);
+    final either = await repository.fetch(request: request);
+    return either.bind((r) {
+      if (request.validateStatus.call(r.status)) {
+        return right(r);
+      }
+
+      final error = UnoError(
+        'Status ${r.status}',
+        request: request,
+        response: r,
+      );
+      return left(error);
+    });
   }
 }

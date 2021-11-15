@@ -6,16 +6,20 @@ class Request {
   final List<int> bodyBytes;
   final ResponseType responseType;
   final void Function(int total, int current)? onDownloadProgress;
+  late final bool Function(int status) validateStatus;
 
-  const Request({
+  Request({
     required this.uri,
     required this.method,
     required this.headers,
+    bool Function(int status)? validateStatus,
     this.bodyBytes = const [],
     required this.timeout,
     this.responseType = ResponseType.json,
     this.onDownloadProgress,
-  });
+  }) {
+    this.validateStatus = validateStatus ?? (status) => status >= 200 && status < 300;
+  }
 
   Request copyWith({
     Uri? uri,
@@ -35,6 +39,11 @@ class Request {
       responseType: responseType ?? this.responseType,
       onDownloadProgress: onDownloadProgress ?? this.onDownloadProgress,
     );
+  }
+
+  @override
+  String toString() {
+    return 'url: ${uri.toString()}, method: $method';
   }
 }
 
