@@ -49,7 +49,7 @@ uno.get('/users',params: {
 Future<void> getUser() async {
   try {
     final response = await uno.get('/user?ID=12345');
-    print(response.data;
+    print(response.data);
   } on UnoError catch (error) {
     print(error);
   }
@@ -90,6 +90,7 @@ uno(
 uno(
   method: 'get',
   url: 'http://bit.ly/2mTM3nY',
+  // you can use plain, json(default), arraybuffer and stream;
   responseType: ResponseType.arraybuffer,
   onDownloadProgress: (total, current) {
     final percentCompleted = (current / total * 100).round();
