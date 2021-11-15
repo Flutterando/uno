@@ -21,9 +21,11 @@ class FormDataResult {
   final List<int> _endBoundary;
 
   static final List<int> _lineBreak = utf8.encode('\r\n');
-  static final List<int> _contentDispositionPrefix = utf8.encode('Content-Disposition: form-data; name="');
+  static final List<int> _contentDispositionPrefix =
+      utf8.encode('Content-Disposition: form-data; name="');
   static final List<int> _contentDispositionPostfix = utf8.encode('"');
-  static final List<int> _contentDispositionInfix = utf8.encode('"; filename="');
+  static final List<int> _contentDispositionInfix =
+      utf8.encode('"; filename="');
   static final List<int> _contentTypePrefix = utf8.encode('Content-Type: ');
 
   FormDataResult(this._entries, this.boundary)

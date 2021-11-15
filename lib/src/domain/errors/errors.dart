@@ -8,7 +8,8 @@ class UnoError<TData> implements Exception {
   final Request? request;
   final Response? response;
 
-  const UnoError(this.message, {this.data, this.stackTrace, this.request, this.response});
+  const UnoError(this.message,
+      {this.data, this.stackTrace, this.request, this.response});
 
   @override
   String toString() {

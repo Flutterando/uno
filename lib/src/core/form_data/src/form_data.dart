@@ -33,20 +33,26 @@ class FormData {
   /// Add a field [name] to the form data.
   ///
   /// [contents] will be added directly to the body, skipping encoding.
-  void addBytes(String name, List<int> bytes, {String? contentType, String? filename}) {
+  void addBytes(String name, List<int> bytes,
+      {String? contentType, String? filename}) {
     _isDirty = true;
     _entries.add(
-      Entry.file(encoding.encode(name), bytes, contentType: contentType == null ? null : encoding.encode(contentType), filename: filename == null ? null : encoding.encode(filename)),
+      Entry.file(encoding.encode(name), bytes,
+          contentType:
+              contentType == null ? null : encoding.encode(contentType),
+          filename: filename == null ? null : encoding.encode(filename)),
     );
   }
 
   /// Add a field [name] to the form data.
   ///
   /// [file] will be added directly to the body, skipping encoding.
-  void addFile(String name, String filePath, {String? contentType, String? filename}) {
+  void addFile(String name, String filePath,
+      {String? contentType, String? filename}) {
     filename ??= basename(filePath);
     contentType ??= mime(filename);
-    addBytes(name, io.File(filePath).readAsBytesSync(), filename: filename, contentType: contentType);
+    addBytes(name, io.File(filePath).readAsBytesSync(),
+        filename: filename, contentType: contentType);
   }
 
   bool _isDirty = true;

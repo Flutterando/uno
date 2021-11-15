@@ -8,13 +8,16 @@ class Interceptors {
 
 class _InterceptorCallback<T> {
   final interceptors = <_InterceptorResolver<T>>[];
-  _InterceptorResolver<T> use(FutureOr<T> Function(T) resolve, {FutureOr<dynamic> Function(UnoError)? onError, bool Function(T)? runWhen}) {
+  _InterceptorResolver<T> use(FutureOr<T> Function(T) resolve,
+      {FutureOr<dynamic> Function(UnoError)? onError,
+      bool Function(T)? runWhen}) {
     final interceptor = _InterceptorResolver<T>(resolve, onError, runWhen);
     interceptors.add(interceptor);
     return interceptor;
   }
 
-  void eject(_InterceptorResolver<T> interceptor) => interceptors.remove(interceptor);
+  void eject(_InterceptorResolver<T> interceptor) =>
+      interceptors.remove(interceptor);
 
   Future<T> resolve(T data) async {
     for (var interceptor in interceptors) {

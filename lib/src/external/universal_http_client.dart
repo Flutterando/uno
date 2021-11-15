@@ -27,13 +27,15 @@ class UniversalHttpClient implements HttpDatasource {
         StreamTransformer.fromHandlers(
           handleData: (value, sink) {
             totalbytes += value.length;
-            unoRequest.onDownloadProgress?.call(response.contentLength, totalbytes);
+            unoRequest.onDownloadProgress
+                ?.call(response.contentLength, totalbytes);
             sink.add(value);
           },
         ),
       );
 
-      var data = await _convertResponseData(mainStream, unoRequest.responseType);
+      var data =
+          await _convertResponseData(mainStream, unoRequest.responseType);
 
       final headers = <String, String>{};
 
@@ -58,7 +60,8 @@ class UniversalHttpClient implements HttpDatasource {
     }
   }
 
-  dynamic _convertResponseData(Stream<List<int>> mainStream, ResponseType responseType) async {
+  dynamic _convertResponseData(
+      Stream<List<int>> mainStream, ResponseType responseType) async {
     if (responseType == ResponseType.json) {
       final buffer = StringBuffer();
       await for (var item in mainStream.transform(utf8.decoder)) {

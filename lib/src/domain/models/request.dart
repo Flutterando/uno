@@ -18,7 +18,8 @@ class Request {
     this.responseType = ResponseType.json,
     this.onDownloadProgress,
   }) {
-    this.validateStatus = validateStatus ?? (status) => status >= 200 && status < 300;
+    this.validateStatus =
+        validateStatus ?? (status) => status >= 200 && status < 300;
   }
 
   Request copyWith({

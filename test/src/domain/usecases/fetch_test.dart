@@ -22,7 +22,8 @@ void main() {
   test('should fetch returning a Reponse object', () async {
     when(() => request.validateStatus).thenReturn((status) => true);
     when(() => response.status).thenReturn(200);
-    when(() => repository.fetch(request: request)).thenAnswer((_) => right(response));
+    when(() => repository.fetch(request: request))
+        .thenAnswer((_) => right(response));
 
     final result = await usecase.call(request: request);
     expect(result.isRight, true);
@@ -30,7 +31,8 @@ void main() {
   test('invalid status', () async {
     when(() => request.validateStatus).thenReturn((status) => false); // <<<
     when(() => response.status).thenReturn(500);
-    when(() => repository.fetch(request: request)).thenAnswer((_) => right(response));
+    when(() => repository.fetch(request: request))
+        .thenAnswer((_) => right(response));
 
     final result = await usecase.call(request: request);
     expect(result.isLeft, true);

@@ -14,7 +14,8 @@ void main() {
 
   test('should return response', () async {
     final request = RequestMock();
-    when(() => datasource.fetch(request)).thenAnswer((_) async => ResponseMock());
+    when(() => datasource.fetch(request))
+        .thenAnswer((_) async => ResponseMock());
 
     final result = await repository.fetch(request: request);
     expect(result.isRight, true);

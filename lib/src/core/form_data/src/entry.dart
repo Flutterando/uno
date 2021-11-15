@@ -4,7 +4,8 @@ class Entry {
 
   const Entry(this.name, this.value);
 
-  factory Entry.value(List<int> name, List<int> bytes) => Entry(name, Value(bytes));
+  factory Entry.value(List<int> name, List<int> bytes) =>
+      Entry(name, Value(bytes));
 
   factory Entry.file(
     List<int> name,
