@@ -4,7 +4,8 @@ import 'package:meta/meta.dart';
 import 'package:uno/src/domain/domain.dart';
 import 'package:uno/src/inject_context.dart';
 import 'package:characters/characters.dart';
-import 'package:uno/src/presenter/interceptors.dart';
+
+part 'interceptors.dart';
 
 abstract class Uno {
   String get baseURL;
@@ -271,18 +272,18 @@ class _Uno implements Uno {
 
   @override
   FutureOr<Response> request(Request request) async {
-    request = await interceptors.request.resolve(request);
+    request = await interceptors.request._resolve(request);
     final fetch = context<Fetch>();
     var result = await fetch(request: request);
 
     return await result.fold((l) async {
-      final resolved = await interceptors.response.resolveError(l);
+      final resolved = await interceptors.response._resolveError(l);
       if (resolved is Response) {
         return resolved;
       }
       throw resolved;
     }, (r) async {
-      return await interceptors.response.resolve(r);
+      return await interceptors.response._resolve(r);
     });
   }
 

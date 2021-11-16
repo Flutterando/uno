@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:uno/src/presenter/interceptors.dart';
+import 'package:uno/src/presenter/uno_base.dart';
 
 import '../../mocks/mocks.dart';
 
@@ -28,9 +28,9 @@ void main() {
     final requestMock = RequestMock();
     final errorMock = UnoErrorMock();
 
-    var request = await interceptors.request.resolve(requestMock);
+    var request = await interceptors.request.resolveTest(requestMock);
 
-    var error = await interceptors.request.resolveError(errorMock);
+    var error = await interceptors.request.resolveErrorTest(errorMock);
 
     expect(request, requestMock);
     expect(error, errorMock);
@@ -40,7 +40,7 @@ void main() {
     requestFn = 0;
     errorFn = 0;
     interceptors.request.eject(resolver);
-    await interceptors.request.resolve(requestMock);
+    await interceptors.request.resolveTest(requestMock);
     expect(requestFn, 2);
     expect(errorFn, 0);
   });

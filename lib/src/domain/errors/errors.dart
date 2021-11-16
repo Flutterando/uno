@@ -1,6 +1,7 @@
 import 'package:uno/src/domain/models/request.dart';
 import 'package:uno/uno.dart';
 
+/// Represents error of uno
 class UnoError<TData> implements Exception {
   final String message;
   final TData? data;

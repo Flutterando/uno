@@ -1,5 +1,4 @@
-import 'package:uno/src/domain/domain.dart';
-import 'package:uno/uno.dart';
+part of 'uno_base.dart';
 
 class Interceptors {
   final request = _InterceptorCallback<Request>();
@@ -19,7 +18,7 @@ class _InterceptorCallback<T> {
   void eject(_InterceptorResolver<T> interceptor) =>
       interceptors.remove(interceptor);
 
-  Future<T> resolve(T data) async {
+  Future<T> _resolve(T data) async {
     for (var interceptor in interceptors) {
       if (interceptor._runWhen?.call(data) == false) {
         continue;
@@ -29,7 +28,13 @@ class _InterceptorCallback<T> {
     return data;
   }
 
-  Future<dynamic> resolveError(UnoError error) async {
+  @visibleForTesting
+  Future<T> resolveTest(T data) => _resolve(data);
+
+  @visibleForTesting
+  Future<dynamic> resolveErrorTest(UnoError error) => _resolveError(error);
+
+  Future<dynamic> _resolveError(UnoError error) async {
     for (var interceptor in interceptors) {
       final data = await interceptor._errorResolve?.call(error);
       if (data is Response) {
