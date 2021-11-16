@@ -7,15 +7,45 @@ import 'package:characters/characters.dart';
 
 part 'interceptors.dart';
 
+typedef DownloadCallback = void Function(int total, int current);
+
+/// This is a Http Client inspired by AxiosJS.
 abstract class Uno {
+  /// `baseURL` will be prepended to `url` unless `url` is absolute.
+  /// It can be convenient to set `baseURL` for an instance of uno to pass relative URLs
+  /// to methods of that instance.
   String get baseURL;
+
+  /// Default request timeout
+  /// Time that the server will wait for the response to the request.
+  /// The connection will be interrupted if you hear timeout.
   Duration get timeout;
+
+  /// Default headers for all requests.
   Map<String, String> get headers;
+
+  /// Create or remove interceptors for [Request] and [Response].
+  /// ```dart
+  /// uno.interceptors.request.use((request) {
+  ///   return request;
+  /// }, onError: (error) {
+  ///   return error;
+  /// });
+  ///
+  /// // or
+  ///
+  /// uno.interceptors.response.use((response) {
+  ///   return response;
+  /// }, onError: (error) {
+  ///   return error;
+  /// });
+  /// ```
   Interceptors get interceptors;
 
   @visibleForTesting
   InjectContext get context;
 
+  /// Creating an instance of Uno with new global options
   factory Uno({
     String baseURL = '',
     Map<String, String> headers = const {},
@@ -23,67 +53,400 @@ abstract class Uno {
   }) =>
       _Uno(baseURL: baseURL, headers: headers, timeout: timeout);
 
+  /// Creates request with uno API:
+  ///
+  /// ```dart
+  ///  uno(
+  ///   method: 'post',
+  ///   url: '/user/12345',
+  ///   timeout: Duration(second: 15),
+  ///   responseType: ResponseType.json,
+  ///   data: {
+  ///     firstName: 'Fred',
+  ///     lastName: 'Flintstone'
+  ///   },
+  /// );
+  /// ```
   Future<Response> call({
+    /// [required] Url of request
     required String url,
+
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Represents the request method. ex: [GET, POST, PUT, DELETE, PATCH, HEAD].
+    /// default is [get].
     String method = 'get',
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
     Map<String, String> params = const {},
+
+    /// Headers of request.
     Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
+
+    /// `data` is the data to be sent as the request body
+    /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
+    /// - String, Map(json) or FormData
     dynamic data,
   });
 
+  /// Aliase to `GET` method.
   Future<Response> get(
     String url, {
+
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
     Map<String, String> params = const {},
+
+    /// Headers of request.
     Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
   });
 
+  /// Aliase to `GET` method.
   Future<Response> post(
     String url, {
+
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
     Map<String, String> params = const {},
+
+    /// Headers of request.
     Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
+
+    /// `data` is the data to be sent as the request body
+    /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
+    /// - String, Map(json) or FormData
     dynamic data,
   });
 
+  /// Aliase to `GET` method.
   Future<Response> put(
     String url, {
+
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
     Map<String, String> params = const {},
+
+    /// Headers of request.
     Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
+
+    /// `data` is the data to be sent as the request body
+    /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
+    /// - String, Map(json) or FormData
     dynamic data,
   });
 
+  /// Aliase to `GET` method.
   Future<Response> delete(
     String url, {
-    Map<String, String> params = const {},
-    Map<String, String> headers = const {},
-    ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
-  });
 
-  Future<Response> patch(
-    String url, {
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
     Map<String, String> params = const {},
+
+    /// Headers of request.
     Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
+
+    /// `data` is the data to be sent as the request body
+    /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
+    /// - String, Map(json) or FormData
     dynamic data,
   });
 
-  Future<Response> head(
+  /// Aliase to `GET` method.
+  Future<Response> patch(
     String url, {
+
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
     Map<String, String> params = const {},
+
+    /// Headers of request.
     Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
+
+    /// `data` is the data to be sent as the request body
+    /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
+    /// - String, Map(json) or FormData
+    dynamic data,
   });
 
+  /// Aliase to `GET` method.
+  Future<Response> head(
+    String url, {
+
+    /// Time that the server will wait for the response to the request.
+    /// The connection will be interrupted if you hear timeout.
+    Duration? timeout,
+
+    /// Adds query params.
+    /// Must be a plain object or a URLSearchParams object.;
+    /// exe:
+    ///```dart
+    /// uno.get('/users',params: {
+    ///   'id': '1',
+    /// });
+    /// ```
+    /// This generate ['/users?id=1'];
+    Map<String, String> params = const {},
+
+    /// Headers of request.
+    Map<String, String> headers = const {},
+
+    /// Represents the [Response] data type.
+    /// Could use:
+    /// ```dart
+    /// ResponseType.json //default
+    /// ResponseType.plain
+    /// ResponseType.arraybuffer
+    /// ResponseType.stream
+    /// ```
+    ResponseType responseType = ResponseType.json,
+
+    /// Callback from API to client about request`s upload.
+    /// ```dart
+    ///  uno(
+    ///  method: 'get',
+    ///  url: 'http://bit.ly/2mTM3nY',
+    ///  // you can use plain, json(default), arraybuffer and stream;
+    ///  responseType: ResponseType.arraybuffer,
+    ///  onDownloadProgress: (total, current) {
+    ///    final percentCompleted = (current / total * 100).round();
+    ///    print('completed: $percentCompleted%');
+    ///  },
+    /// ).then((response) async {
+    ///   await File('ada_lovelace.jpg').writeAsBytes(response.data);
+    /// });
+    /// ```
+    DownloadCallback? onDownloadProgress,
+  });
+
+  /// Send a complete Request object.
   FutureOr<Response> request(Request request);
 }
 
@@ -112,10 +475,11 @@ class _Uno implements Uno {
   @override
   Future<Response> get(
     String url, {
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
   }) {
     return call(
       url: url,
@@ -123,6 +487,7 @@ class _Uno implements Uno {
       params: params,
       headers: headers,
       responseType: responseType,
+      timeout: timeout,
       onDownloadProgress: onDownloadProgress,
     );
   }
@@ -130,10 +495,12 @@ class _Uno implements Uno {
   @override
   Future<Response> delete(
     String url, {
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
+    dynamic data,
   }) {
     return call(
       url: url,
@@ -142,22 +509,26 @@ class _Uno implements Uno {
       headers: headers,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
+      timeout: timeout,
+      data: data,
     );
   }
 
   @override
   Future<Response> head(
     String url, {
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
   }) {
     return call(
       url: url,
       method: 'head',
       params: params,
       headers: headers,
+      timeout: timeout,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
     );
@@ -166,10 +537,11 @@ class _Uno implements Uno {
   @override
   Future<Response> patch(
     String url, {
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
     dynamic data,
   }) {
     return call(
@@ -178,6 +550,7 @@ class _Uno implements Uno {
       params: params,
       headers: headers,
       data: data,
+      timeout: timeout,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
     );
@@ -186,10 +559,11 @@ class _Uno implements Uno {
   @override
   Future<Response> post(
     String url, {
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
     dynamic data,
   }) {
     return call(
@@ -198,6 +572,7 @@ class _Uno implements Uno {
       params: params,
       headers: headers,
       data: data,
+      timeout: timeout,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
     );
@@ -206,10 +581,11 @@ class _Uno implements Uno {
   @override
   Future<Response> put(
     String url, {
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
     dynamic data,
   }) {
     return call(
@@ -218,6 +594,7 @@ class _Uno implements Uno {
       params: params,
       headers: headers,
       data: data,
+      timeout: timeout,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
     );
@@ -227,10 +604,11 @@ class _Uno implements Uno {
   Future<Response> call({
     required String url,
     String method = 'get',
+    Duration? timeout,
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
-    void Function(int total, int current)? onDownloadProgress,
+    DownloadCallback? onDownloadProgress,
     dynamic data,
   }) async {
     url = '$baseURL$url${_encodeParamsToQueries(params)}';
@@ -241,7 +619,7 @@ class _Uno implements Uno {
 
     final uri = Uri.parse(url);
     var myRequest = Request(
-      timeout: timeout,
+      timeout: timeout ?? this.timeout,
       uri: uri,
       headers: _headers,
       method: method,
