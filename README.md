@@ -105,11 +105,11 @@ All API`s parameters:
 ```dart
 
 // [required] Url of request
-required String url,
+String url,
 
 // Time that the server will wait for the response to the request.
 // The connection will be interrupted if you hear timeout.
-Duration? timeout,
+Duration timeout,
 
 // Represents the request method. ex: [GET, POST, PUT, DELETE, PATCH, HEAD].
 // default is [get].
