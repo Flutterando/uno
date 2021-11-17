@@ -127,10 +127,10 @@ Map<String, String> headers,
 ResponseType responseType = ResponseType.json,
 
 // Callback from API to client about request`s upload.
-DownloadCallback? onDownloadProgress,
+DownloadCallback onDownloadProgress,
 
 // Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
-ValidateCallback? validateStatus,
+ValidateCallback validateStatus,
 
 // `data` is the data to be sent as the request body
 // Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
