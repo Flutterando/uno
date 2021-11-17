@@ -100,6 +100,40 @@ uno(
   await File('ada_lovelace.jpg').writeAsBytes(response.data);
 });
 ```
+All API`s parameters:
+
+```dart
+
+// [required] Url of request
+required String url,
+
+// Time that the server will wait for the response to the request.
+// The connection will be interrupted if you hear timeout.
+Duration? timeout,
+
+// Represents the request method. ex: [GET, POST, PUT, DELETE, PATCH, HEAD].
+// default is [get].
+String method = 'get',
+
+// Adds query params.
+// Must be a plain object or a URLSearchParams object;
+Map<String, String> params,
+
+// Headers of request.
+Map<String, String> headers,
+
+// Represents the [Response] data type.
+// Could use: json(default), plain(String), arraybuffer(List<int>) and stream. 
+ResponseType responseType = ResponseType.json,
+
+// Callback from API to client about request`s upload.
+DownloadCallback? onDownloadProgress,
+
+// `data` is the data to be sent as the request body
+// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
+// - String, Map(json) or FormData
+dyamic data,
+```
 
 ## Creating an instance
 
