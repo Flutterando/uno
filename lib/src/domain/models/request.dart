@@ -1,3 +1,5 @@
+typedef ValidateCallback = bool Function(int status);
+
 /// Represents the request that will be sent to the http server.
 class Request {
   /// A parsed URI, such as a URL.
@@ -51,13 +53,13 @@ class Request {
   ///   }
   /// });
   /// ```
-  late final bool Function(int status) validateStatus;
+  late final ValidateCallback validateStatus;
 
   Request({
     required this.uri,
     required this.method,
     required this.headers,
-    bool Function(int status)? validateStatus,
+    ValidateCallback? validateStatus,
     this.bodyBytes = const [],
     required this.timeout,
     this.responseType = ResponseType.json,
@@ -75,10 +77,12 @@ class Request {
     Map<String, String>? headers,
     List<int>? bodyBytes,
     ResponseType? responseType,
+    ValidateCallback? validateStatus,
     void Function(int total, int current)? onDownloadProgress,
   }) {
     return Request(
       uri: uri ?? this.uri,
+      validateStatus: validateStatus ?? this.validateStatus,
       timeout: timeout ?? this.timeout,
       method: method ?? this.method,
       headers: headers ?? this.headers,

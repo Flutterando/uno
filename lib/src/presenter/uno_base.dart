@@ -120,6 +120,16 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
+
     /// `data` is the data to be sent as the request body
     /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
     /// - String, Map(json) or FormData
@@ -174,6 +184,16 @@ abstract class Uno {
     /// });
     /// ```
     DownloadCallback? onDownloadProgress,
+
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
   });
 
   /// Aliase to `GET` method.
@@ -224,6 +244,16 @@ abstract class Uno {
     /// });
     /// ```
     DownloadCallback? onDownloadProgress,
+
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
 
     /// `data` is the data to be sent as the request body
     /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
@@ -280,6 +310,16 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
+
     /// `data` is the data to be sent as the request body
     /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
     /// - String, Map(json) or FormData
@@ -334,6 +374,16 @@ abstract class Uno {
     /// });
     /// ```
     DownloadCallback? onDownloadProgress,
+
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
 
     /// `data` is the data to be sent as the request body
     /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
@@ -390,6 +440,16 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
+
     /// `data` is the data to be sent as the request body
     /// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
     /// - String, Map(json) or FormData
@@ -444,6 +504,16 @@ abstract class Uno {
     /// });
     /// ```
     DownloadCallback? onDownloadProgress,
+
+    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// ```dart
+    /// axios.get('/user/12345', {
+    ///   validateStatus: (status) {
+    ///     return status < 500; // Resolve only if the status code is less than 500
+    ///   }
+    /// });
+    /// ```
+    ValidateCallback? validateStatus,
   });
 
   /// Send a complete Request object.
@@ -479,6 +549,7 @@ class _Uno implements Uno {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
+    ValidateCallback? validateStatus,
     DownloadCallback? onDownloadProgress,
   }) {
     return call(
@@ -487,6 +558,7 @@ class _Uno implements Uno {
       params: params,
       headers: headers,
       responseType: responseType,
+      validateStatus: validateStatus,
       timeout: timeout,
       onDownloadProgress: onDownloadProgress,
     );
@@ -499,6 +571,7 @@ class _Uno implements Uno {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
+    ValidateCallback? validateStatus,
     DownloadCallback? onDownloadProgress,
     dynamic data,
   }) {
@@ -509,6 +582,7 @@ class _Uno implements Uno {
       headers: headers,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
+      validateStatus: validateStatus,
       timeout: timeout,
       data: data,
     );
@@ -521,6 +595,7 @@ class _Uno implements Uno {
     Map<String, String> params = const {},
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
+    ValidateCallback? validateStatus,
     DownloadCallback? onDownloadProgress,
   }) {
     return call(
@@ -530,6 +605,7 @@ class _Uno implements Uno {
       headers: headers,
       timeout: timeout,
       responseType: responseType,
+      validateStatus: validateStatus,
       onDownloadProgress: onDownloadProgress,
     );
   }
@@ -542,6 +618,7 @@ class _Uno implements Uno {
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
     DownloadCallback? onDownloadProgress,
+    ValidateCallback? validateStatus,
     dynamic data,
   }) {
     return call(
@@ -552,6 +629,7 @@ class _Uno implements Uno {
       data: data,
       timeout: timeout,
       responseType: responseType,
+      validateStatus: validateStatus,
       onDownloadProgress: onDownloadProgress,
     );
   }
@@ -564,6 +642,7 @@ class _Uno implements Uno {
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
     DownloadCallback? onDownloadProgress,
+    ValidateCallback? validateStatus,
     dynamic data,
   }) {
     return call(
@@ -573,6 +652,7 @@ class _Uno implements Uno {
       headers: headers,
       data: data,
       timeout: timeout,
+      validateStatus: validateStatus,
       responseType: responseType,
       onDownloadProgress: onDownloadProgress,
     );
@@ -586,6 +666,7 @@ class _Uno implements Uno {
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
     DownloadCallback? onDownloadProgress,
+    ValidateCallback? validateStatus,
     dynamic data,
   }) {
     return call(
@@ -596,6 +677,7 @@ class _Uno implements Uno {
       data: data,
       timeout: timeout,
       responseType: responseType,
+      validateStatus: validateStatus,
       onDownloadProgress: onDownloadProgress,
     );
   }
@@ -609,6 +691,7 @@ class _Uno implements Uno {
     Map<String, String> headers = const {},
     ResponseType responseType = ResponseType.json,
     DownloadCallback? onDownloadProgress,
+    ValidateCallback? validateStatus,
     dynamic data,
   }) async {
     url = '$baseURL$url${_encodeParamsToQueries(params)}';
@@ -624,6 +707,7 @@ class _Uno implements Uno {
       headers: _headers,
       method: method,
       responseType: responseType,
+      validateStatus: validateStatus,
       onDownloadProgress: onDownloadProgress,
     );
 
