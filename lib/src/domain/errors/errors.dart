@@ -1,4 +1,3 @@
-import 'package:uno/src/domain/models/request.dart';
 import 'package:uno/uno.dart';
 
 /// Represents error of uno

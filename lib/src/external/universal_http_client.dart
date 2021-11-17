@@ -34,8 +34,8 @@ class UniversalHttpClient implements HttpDatasource {
         ),
       );
 
-      var data =
-          await _convertResponseData(mainStream, unoRequest.responseType);
+      var data = await _convertResponseData(
+          mainStream, unoRequest.responseType, unoRequest);
 
       final headers = <String, String>{};
 
@@ -60,20 +60,39 @@ class UniversalHttpClient implements HttpDatasource {
     }
   }
 
-  dynamic _convertResponseData(
-      Stream<List<int>> mainStream, ResponseType responseType) async {
+  dynamic _convertResponseData(Stream<List<int>> mainStream,
+      ResponseType responseType, Request request) async {
     if (responseType == ResponseType.json) {
-      final buffer = StringBuffer();
-      await for (var item in mainStream.transform(utf8.decoder)) {
-        buffer.write(item);
+      try {
+        final buffer = StringBuffer();
+        await for (var item in mainStream.transform(utf8.decoder)) {
+          buffer.write(item);
+        }
+
+        return jsonDecode(buffer.toString());
+      } on FormatException catch (e, s) {
+        throw UnoError<FormatException>(
+          'Data body isn`t a json. Please, use other [ResponseType] in request.',
+          data: e,
+          request: request,
+          stackTrace: s,
+        );
       }
-      return jsonDecode(buffer.toString());
     } else if (responseType == ResponseType.plain) {
-      final buffer = StringBuffer();
-      await for (var item in mainStream.transform(utf8.decoder)) {
-        buffer.write(item);
+      try {
+        final buffer = StringBuffer();
+        await for (var item in mainStream.transform(utf8.decoder)) {
+          buffer.write(item);
+        }
+        return buffer.toString();
+      } on FormatException catch (e, s) {
+        throw UnoError<FormatException>(
+          'Data body isn`t a plain text (String). Please, use other [ResponseType] in request.',
+          data: e,
+          request: request,
+          stackTrace: s,
+        );
       }
-      return buffer.toString();
     } else if (responseType == ResponseType.arraybuffer) {
       var bytes = <int>[];
       await for (var b in mainStream) {
