@@ -11,7 +11,7 @@ export 'package:uno/src/core/types/either.dart';
 export 'entities/response.dart';
 export 'errors/errors.dart';
 export 'usecases/fetch.dart';
-export 'models/request.dart';
+export 'dto/request.dart';
 export 'repositories/http_repository.dart';
 export 'package:uno/src/core/form_data/form_data.dart';
 
