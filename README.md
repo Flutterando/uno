@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://pub.dev/packages/uno">
-    <img src="images/logoTemp.png" alt="Logo" width="120">
+    <img src="images/logo.png" alt="Logo" width="120">
   </a>
 
   <p align="center">
@@ -116,6 +116,7 @@ uno.get('/users?id=1').then((response){
   print(error) // It's a UnoError.
 });
 ```
+
 _For more examples, please refer to the_ [Documentation](https://pub.dev/documentation/uno/latest/)
 
 
