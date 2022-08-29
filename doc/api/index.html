@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 5.1.0-dev">
+  <meta name="description" content="uno API docs, for the Dart programming language.">
+  <title>uno - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href=""
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/Flutterando/uno.git">uno package</a></li>
+  </ol>
+  <div class="self-name">uno</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p><a name="readme-top"></a></p><h1 align="center">Uno - Future based HTTP client for the Dart and Flutter.</h1><!-- PROJECT LOGO --><br>
+<div align="center">
+  <a href="https://github.com/Flutterando/uno">
+    <img src="images/logo.png" alt="Logo" width="180">
+  </a>  <p align="center">
+    Uno, inspired by Axios, bringing a simple and robust experience to the crossplatform apps in Flutter and server apps in Dart.
+    <br>
+    <a href="https://pub.dev/documentation/uno/latest/"><strong>Explore the docs »</strong></a>
+    <br>
+    <br>
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+  </p><br><!--  SHIELDS  ---->
+<p><a href="https://github.com/Flutterando/uno/blob/master/LICENSE"><img src="https://img.shields.io/github/license/flutterando/uno?style=plastic" alt="License"></a>
+<a href="https://pub.dev/packages/uno/score"><img src="https://img.shields.io/pub/points/asuka?label=pub%20points&amp;style=plastic" alt="Pub Points"></a>
+<a href="https://github.com/Flutterando/uno/graphs/contributors"><img src="https://img.shields.io/github/contributors/flutterando/asuka?style=plastic" alt="Contributors"></a>
+<a href="https://github.com/Flutterando/asuka/graphs/contributors"><img src="https://img.shields.io/github/forks/flutterando/uno?color=yellowgreen&amp;logo=github&amp;style=plastic" alt="Forks"></a></p>
+<p><a href="https://pub.dev/publishers/flutterando.com.br/packages"><img src="https://img.shields.io/pub/publisher/uno?style=plastic" alt="Pub Publisher"></a>
+<a href="https://www.youtube.com/flutterando"><img src="https://img.shields.io/youtube/channel/subscribers/UCplT2lzN6MHlVHHLt6so39A?color=blue&amp;label=Flutterando&amp;logo=YouTube&amp;logoColor=red&amp;style=plastic" alt="Flutterando Youtube"></a></p></div><br><!-- TABLE OF CONTENTS --><details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#sponsors">Sponsors</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details><br><!-- ABOUT THE PROJECT -->
+<h2 id="about-the-project">About The Project</h2><br>
+<center>
+<img src="images/Example-uno.png" alt="Uno PNG" width="400">
+</center><br>
+<p>Uno brings a simple and robust experience to the crossplatform apps in Flutter and server apps in Dart.</p><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- SPONSORS -->
+<h2 id="sponsors">Sponsors</h2><a href="https://fteam.dev">
+    <img src="images/sponsor-logo.png" alt="Logo" width="180">
+  </a><p align="right">(<a href="#readme-top">back to top</a>)</p>
+<br><!-- GETTING STARTED -->
+<h2 id="getting-started">Getting Started</h2>
+<p>To install Uno in your project you can follow the instructions below:</p>
+<p>a) Add in your pubspec.yaml:</p>
+<pre class="language-sh"><code class="language-sh">   dependencies:
+   uno: &lt;last-version&gt;
+</code></pre>
+<p>b)    or use:</p>
+<pre class="language-sh"><code class="language-sh">   dart pub add uno
+</code></pre><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- USAGE EXAMPLES -->
+<h2 id="how-to-use">How To Use</h2>
+<p>Uno is ready for the REST. Methods like GET, POST, PUT, PATCH, DELETE are welcome here!</p>
+<p>Performing a <strong>GET</strong> request:</p>
+<pre class="language-dart"><code class="language-dart">final uno = Uno();
+
+// Make a request for a user with a given ID
+uno.get('/users?id=1').then((response){
+  print(response.data); // it's a Map&lt;String, dynamic&gt;.
+}).catchError((error){
+  print(error) // It's a UnoError.
+});
+
+// Optionally the request above could also be done as
+uno.get('/users',params: {
+  'id': '1',
+}).then((response){
+  print(response.data);
+});
+
+// Want to use async/await? Add the `async` keyword to your outer function/method.
+Future&lt;void&gt; getUser() async {
+  try {
+    final response = await uno.get('/user?ID=12345');
+    print(response.data);
+  } on UnoError catch (error) {
+    print(error);
+  }
+}
+</code></pre>
+<p>Performing a <strong>POST</strong> request:</p>
+<pre class="language-dart"><code class="language-dart">  uno.post('/user', data: {
+    'firstName': 'Fred',
+    'lastName': 'Flintstone'
+  })
+  .then((response) {
+    print(response);
+  })
+  .catchError((error) {
+    print(error);
+  });
+</code></pre>
+<p>_For more examples, please refer to the <a href="https://pub.dev/documentation/uno/latest/">Documentation</a></p><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- ROADMAP -->
+<h2 id="features">Features</h2>
+<ul>
+<li>✅ GET</li>
+<li>✅ POST</li>
+<li>✅ PATCH</li>
+<li>✅ PUT</li>
+<li>✅ DELETE</li>
+<li>✅ Interceptors</li>
+<li>✅ Error Handler</li>
+<li>✅ Multipart/FormData</li>
+</ul>
+<p>Right now this package has concluded all his intended features. If you have any suggestions or find something to report, see below how to contribute to it.</p><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- CONTRIBUTING -->
+<h2 id="contributing">Contributing</h2>
+<p>🚧 <a href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md">Contributing Guidelines</a> - Currently being updated 🚧</p>
+<p>Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are <strong>greatly appreciated</strong>.</p>
+<p>If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the appropriate tag. 
+Don't forget to give the project a star! Thanks again!</p>
+<ol>
+<li>Fork the Project</li>
+<li>Create your Feature Branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
+<li>Commit your Changes (<code>git commit -m 'Add some AmazingFeature'</code>)</li>
+<li>Push to the Branch (<code>git push origin feature/AmazingFeature</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<p>Remember to include a tag, and to follow <a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a> and <a href="https://semver.org/">Semantic Versioning</a> when uploading your commit and/or creating the issue.</p><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- LICENSE -->
+<h2 id="license">License</h2>
+<p>Distributed under the MIT License. See <code>LICENSE.txt</code> for more information.</p><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- CONTACT -->
+<h2 id="contact">Contact</h2>
+<p>Flutterando Community</p>
+<ul>
+<li><a href="https://discord.gg/qNBDHNARja">Discord</a></li>
+<li><a href="https://t.me/flutterando">Telegram</a></li>
+<li><a href="https://www.flutterando.com.br/">Website</a></li>
+<li><a href="https://www.youtube.com.br/flutterando">Youtube Channel</a></li>
+<li><a href="https://linktr.ee/flutterando">Other useful links</a></li>
+</ul><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- ACKNOWLEDGMENTS -->
+<h2 id="contributors">Contributors</h2><a href="https://github.com/flutterando/asuka/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=flutterando/asuka">
+</a>
+<!-- Bot para Lista de contribuidores - https://allcontributors.org/  -->
+<!-- Opção (utilizada no momento): https://contrib.rocks/preview?repo=flutterando%2Fasuka --><p align="right">(<a href="#readme-top">back to top</a>)</p><!-- ACKNOWLEDGMENTS -->
+<h2 id="maintaned-by">Maintaned by</h2>
+<hr><br>
+<p align="center">
+  <a href="https://www.flutterando.com.br">
+    <img width="110px" src="images/logo-flutterando.png">
+  </a>
+  </p><p align="center">
+    Built and maintained by <a href="https://www.flutterando.com.br">Flutterando</a>.
+  </p>
+<p></p><!-- MARKDOWN LINKS & IMAGES --><!-- https://www.markdownguide.org/basic-syntax/#reference-style-links --><!-- [Choose an Open Source License](https://choosealicense.com)
+[GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+[Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+[Malven's Grid Cheatsheet](https://grid.malven.co/)
+[Img Shields](https://shields.io)
+[GitHub Pages](https://pages.github.com)
+[Font Awesome](https://fontawesome.com)
+[React Icons](https://react-icons.github.io/react-icons/search) 
+
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com  -->
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="uno">
+  <span class="name"><a href="uno/uno-library.html">uno</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="https://github.com/Flutterando/uno.git">uno package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">uno</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="uno/uno-library.html">uno</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    uno
+      1.0.1+3
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

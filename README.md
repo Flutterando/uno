@@ -6,14 +6,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/Flutterando/uno">
     <img src="images/logo.png" alt="Logo" width="180">
   </a>
 
   <p align="center">
     Uno, inspired by Axios, bringing a simple and robust experience to the crossplatform apps in Flutter and server apps in Dart.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://pub.dev/documentation/uno/latest/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
@@ -161,7 +161,7 @@ Performing a **POST** request:
 ``` 
 
 
-_For more examples, please refer to the 🚧 [Documentation](https://example.com) - Currently being updated 🚧 .
+_For more examples, please refer to the [Documentation](https://pub.dev/documentation/uno/latest/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
