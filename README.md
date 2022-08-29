@@ -115,26 +115,7 @@ uno.get('/users?id=1').then((response){
 }).catchError((error){
   print(error) // It's a UnoError.
 });
-
-// Optionally the request above could also be done as
-uno.get('/users', params: {
-  'id': '1',
-}).then((response){
-  print(response.data);
-});
-
-// Want to use async/await? Add the `async` keyword to your outer function/method.
-Future<void> getUser() async {
-  try {
-    final response = await uno.get('/user?ID=12345');
-    print(response.data);
-  } on UnoError catch (error) {
-    print(error);
-  }
-}
 ```
-
-
 
 _For more examples, please refer to the_ [Documentation](https://pub.dev/documentation/uno/latest/)
 
