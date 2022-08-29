@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://pub.dev/packages/uno">
-    <img src="images/logo.png" alt="Logo" width="120">
+    <img src="images/logoTemp.png" alt="Logo" width="120">
   </a>
 
   <p align="center">
