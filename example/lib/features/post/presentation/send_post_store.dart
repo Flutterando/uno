@@ -13,11 +13,7 @@ class SendPostStore extends StreamStore<Exception, RequestEntity> {
     final entity = RequestEntity(title: 'teste', body: 'body');
     await Future.delayed(const Duration(seconds: 2));
     final result = await usecase.postTest(entity);
-    result.fold((l) {
-      setError(l);
-    }, (r) {
-      update(r);
-    });
+    result.fold(setError, update);
     setLoading(false);
   }
 }

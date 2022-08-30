@@ -10,13 +10,13 @@ class SendDeleteDataSource implements ISendDeleteDataSource {
   SendDeleteDataSource(this.uno);
 
   @override
-  Future<RequestEntity> sendDelete(entity) async {
+  Future<RequestEntity> sendDelete(RequestEntity entity) async {
     try {
       final response = await uno
           .delete('https://jsonplaceholder.typicode.com/posts/${entity.id}');
       if (response.status != 404) {
         return RequestEntity(
-            title: 'title', body: 'body', status: response.status);
+            title: 'title', body: 'body', status: response.status,);
       } else {
         throw Exception();
       }

@@ -7,7 +7,7 @@ void main() {
       uri: Uri.parse('uri'),
       method: 'method',
       headers: {},
-      timeout: Duration(seconds: 30),
+      timeout: const Duration(seconds: 30),
     );
     final copy = request.copyWith();
     expect(request != copy, true);

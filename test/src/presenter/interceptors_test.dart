@@ -15,7 +15,7 @@ void main() {
     }, onError: (error) {
       errorFn++;
       return error;
-    });
+    },);
     interceptors.request.use((request) {
       requestFn++;
       return request;
@@ -28,9 +28,9 @@ void main() {
     final requestMock = RequestMock();
     final errorMock = UnoErrorMock();
 
-    var request = await interceptors.request.resolveTest(requestMock);
+    final request = await interceptors.request.resolveTest(requestMock);
 
-    var error = await interceptors.request.resolveErrorTest(errorMock);
+    final error = await interceptors.request.resolveErrorTest(errorMock);
 
     expect(request, requestMock);
     expect(error, errorMock);

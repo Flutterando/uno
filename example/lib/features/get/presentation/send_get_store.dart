@@ -14,8 +14,6 @@ class GetFactStore extends MobXStore<Exception, List<dynamic>> {
     result.fold((l) {
       setError(l);
       setLoading(false);
-    }, (r) {
-      update(r);
-    });
+    }, update,);
   }
 }

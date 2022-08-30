@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import '../infra/infra.dart';
 import 'package:universal_io/io.dart';
+
+import '../infra/infra.dart';
 
 class UniversalHttpClient implements HttpDatasource {
   final HttpClient client;
@@ -14,7 +15,7 @@ class UniversalHttpClient implements HttpDatasource {
     try {
       final request = await client.openUrl(unoRequest.method, unoRequest.uri);
 
-      for (var key in unoRequest.headers.keys) {
+      for (final key in unoRequest.headers.keys) {
         request.headers.set(key, unoRequest.headers[key]!);
       }
 
@@ -27,15 +28,20 @@ class UniversalHttpClient implements HttpDatasource {
         StreamTransformer.fromHandlers(
           handleData: (value, sink) {
             totalbytes += value.length;
-            unoRequest.onDownloadProgress
-                ?.call(response.contentLength, totalbytes);
+            unoRequest.onDownloadProgress?.call(
+              response.contentLength,
+              totalbytes,
+            );
             sink.add(value);
           },
         ),
       );
 
-      var data = await _convertResponseData(
-          mainStream, unoRequest.responseType, unoRequest);
+      final data = await _convertResponseData(
+        mainStream,
+        unoRequest.responseType,
+        unoRequest,
+      );
 
       final headers = <String, String>{};
 
@@ -60,19 +66,22 @@ class UniversalHttpClient implements HttpDatasource {
     }
   }
 
-  dynamic _convertResponseData(Stream<List<int>> mainStream,
-      ResponseType responseType, Request request) async {
+  dynamic _convertResponseData(
+    Stream<List<int>> mainStream,
+    ResponseType responseType,
+    Request request,
+  ) async {
     if (responseType == ResponseType.json) {
       try {
         final buffer = StringBuffer();
-        await for (var item in mainStream.transform(utf8.decoder)) {
+        await for (final item in mainStream.transform(utf8.decoder)) {
           buffer.write(item);
         }
 
         return jsonDecode(buffer.toString());
       } on FormatException catch (e, s) {
         throw UnoError<FormatException>(
-          'Data body isn`t a json. Please, use other [ResponseType] in request.',
+          '''Data body isn`t a json. Please, use other [ResponseType] in request.''',
           data: e,
           request: request,
           stackTrace: s,
@@ -81,21 +90,21 @@ class UniversalHttpClient implements HttpDatasource {
     } else if (responseType == ResponseType.plain) {
       try {
         final buffer = StringBuffer();
-        await for (var item in mainStream.transform(utf8.decoder)) {
+        await for (final item in mainStream.transform(utf8.decoder)) {
           buffer.write(item);
         }
         return buffer.toString();
       } on FormatException catch (e, s) {
         throw UnoError<FormatException>(
-          'Data body isn`t a plain text (String). Please, use other [ResponseType] in request.',
+          '''Data body isn`t a plain text (String). Please, use other [ResponseType] in request.''',
           data: e,
           request: request,
           stackTrace: s,
         );
       }
     } else if (responseType == ResponseType.arraybuffer) {
-      var bytes = <int>[];
-      await for (var b in mainStream) {
+      final bytes = <int>[];
+      await for (final b in mainStream) {
         bytes.addAll(b);
       }
       return bytes;

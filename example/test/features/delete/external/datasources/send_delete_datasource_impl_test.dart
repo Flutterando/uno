@@ -14,7 +14,7 @@ void main() {
    final entity = RequestEntity(body: 'Hello', title: 'post test', id: 1);
 
   group(SendDeleteDataSource, () {
-    test('Should use a delete method', (() async {
+    test('Should use a delete method', () async {
       final request = Request(
         headers: const {'test': 'test'},
         method: 'delete',
@@ -22,7 +22,7 @@ void main() {
         uri: Uri.parse('https://jsonplaceholder.typicode.com/posts/${entity.id}'),
       );
 
-      when((() => uno.delete(any()))).thenAnswer(
+      when(() => uno.delete(any())).thenAnswer(
         (_) async => Response(
           headers: const {'test': 'test'},
           request: request,
@@ -33,6 +33,6 @@ void main() {
 
       final result = dataSource.sendDelete(entity);
       expect(result, completes);
-    }));
+    },);
   });
 }

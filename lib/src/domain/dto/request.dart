@@ -18,7 +18,7 @@ class Request {
   /// Buffer of data that will be sent to the server.
   final List<int> bodyBytes;
 
-  /// Represents the [Response] data type.
+  /// Represents the Response data type.
   /// Could use:
   /// ```dart
   /// ResponseType.json //default
@@ -45,7 +45,8 @@ class Request {
   /// ```
   final void Function(int total, int current)? onDownloadProgress;
 
-  /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+  /// Using the validateStatus config option, you can define HTTP code(s) that
+  /// should throw an error.
   /// ```dart
   /// axios.get('/user/12345', {
   ///   validateStatus: (status) {
@@ -65,8 +66,11 @@ class Request {
     this.responseType = ResponseType.json,
     this.onDownloadProgress,
   }) {
-    this.validateStatus =
-        validateStatus ?? (status) => status >= 200 && status < 300;
+    this.validateStatus = validateStatus ??
+        (
+          status,
+        ) =>
+            status >= 200 && status < 300;
   }
 
   /// Create a new copy of request object.
@@ -98,7 +102,7 @@ class Request {
   }
 }
 
-/// Represents the [Response] data type.
+/// Represents the Response data type.
 /// Could use:
 /// ```dart
 /// ResponseType.json //default
@@ -107,15 +111,15 @@ class Request {
 /// ResponseType.stream
 /// ```
 enum ResponseType {
-  /// [Response.data] will return [Map] object.
+  /// Response.data will return [Map] object.
   json,
 
-  /// [Response.data] will return a [String]
+  /// Response.data will return a [String]
   plain,
 
-  /// [Response.data] will return a [List<int>]
+  /// Response.data will return a [List<int>]
   arraybuffer,
 
-  /// [Response.data] will return a [Stream]
+  /// Response.data will return a [Stream]
   stream,
 }

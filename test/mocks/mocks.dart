@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:mocktail/mocktail.dart';
 import 'package:universal_io/io.dart';
-import 'package:uno/src/domain/domain.dart';
 import 'package:uno/src/infra/infra.dart';
 
 export 'package:mocktail/mocktail.dart';

@@ -16,7 +16,7 @@ void main() {
    final entity = RequestEntity(body: 'Hello', title: 'post test', id: 1);
 
   group(SendPutDataSource, () {
-    test('Should use a put method', (() async {
+    test('Should use a put method', () async {
       final request = Request(
         headers: const {'test': 'test'},
         method: 'put',
@@ -24,7 +24,7 @@ void main() {
         uri: Uri.parse('https://jsonplaceholder.typicode.com/posts/${entity.id}'),
       );
 
-      when((() => uno.put(any()))).thenAnswer(
+      when(() => uno.put(any())).thenAnswer(
         (_) async => Response(
           headers: const {'test': 'test'},
           request: request,
@@ -35,6 +35,6 @@ void main() {
 
       final result = dataSource.sendPut(entity);
       expect(result, completes);
-    }));
+    },);
   });
 }

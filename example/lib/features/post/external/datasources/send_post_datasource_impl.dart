@@ -8,12 +8,17 @@ class SendPostDataSource implements ISendPostDataSource {
   SendPostDataSource(this.uno);
 
   @override
-  Future<RequestEntity> postTest(entity) async {
+  Future<RequestEntity> postTest(RequestEntity entity) async {
     try {
-      final response = await uno.post('https://jsonplaceholder.typicode.com/posts/?title=${entity.title}&body=${entity.body}');
+      final response = await uno.post(
+        'https://jsonplaceholder.typicode.com/posts/?title=${entity.title}&body=${entity.body}',
+      );
       if (response.status == 201) {
-        
-        return RequestEntity(title: 'title', body: 'body', status: response.status);
+        return RequestEntity(
+          title: 'title',
+          body: 'body',
+          status: response.status,
+        );
       } else {
         throw Exception();
       }

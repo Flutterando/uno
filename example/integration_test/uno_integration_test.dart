@@ -27,18 +27,23 @@ void main() {
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  setUp((() {
-    initModule(AppModule(), replaceBinds: [
-      Bind.instance<Uno>(unoMock),
-      Bind.instance<SendGetDataSource>(sendGetMock),
-      Bind.instance<SendGetRepository>(sendRepositoryMock),
-      Bind.instance<GetFactsUseCase>(sendUseCaseMock),
-    ]);
-  }));
+  setUp(
+    () {
+      initModule(
+        AppModule(),
+        replaceBinds: [
+          Bind.instance<Uno>(unoMock),
+          Bind.instance<SendGetDataSource>(sendGetMock),
+          Bind.instance<SendGetRepository>(sendRepositoryMock),
+          Bind.instance<GetFactsUseCase>(sendUseCaseMock),
+        ],
+      );
+    },
+  );
 
   testWidgets('Test if info from get appears', (tester) async {
-    const String content =
-        "sunt aut facere repellat provident occaecati excepturi optio reprehenderit";
+    const content =
+        '''sunt aut facere repellat provident occaecati excepturi optio reprehenderit''';
     await tester.pumpWidget(buildScreen());
 
     final textFinder = find.text(content);
@@ -49,7 +54,7 @@ void main() {
   testWidgets(
     'Should send a POST request when click the button',
     (tester) async {
-      const String content = 'http status response:201';
+      const content = 'http status response:201';
       await tester.pumpWidget(buildScreen());
 
       // Create the Finders.
@@ -64,7 +69,7 @@ void main() {
   testWidgets(
     'Should send a DELETE request when click the button',
     (tester) async {
-      const String content = 'http status response:200';
+      const content = 'http status response:200';
       await tester.pumpWidget(buildScreen());
 
       // Create the Finders.
@@ -79,7 +84,7 @@ void main() {
   testWidgets(
     'Should send a PATCH request when click the button',
     (tester) async {
-      const String content = 'http status response:200';
+      const content = 'http status response:200';
       await tester.pumpWidget(buildScreen());
 
       // Create the Finders.
@@ -94,14 +99,13 @@ void main() {
   testWidgets(
     'Should send a PUT request when click the button',
     (tester) async {
-      const String content = 'http status response:200';
+      const content = 'http status response:200';
       await tester.pumpWidget(buildScreen());
 
       // Create the Finders.
       final btnFinder = find.text('Put test');
       await tester.tap(btnFinder);
-      final gesture = await tester
-          .startGesture(const Offset(0, 300)); 
+      final gesture = await tester.startGesture(const Offset(0, 300));
       await gesture.moveBy(const Offset(0, -300));
       await tester.pump();
       await tester.pumpAndSettle(const Duration(seconds: 3));
