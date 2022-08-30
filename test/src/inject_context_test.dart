@@ -5,12 +5,14 @@ import 'package:uno/src/inject_context.dart';
 void main() {
   test('inject context register', () async {
     final context = InjectContext();
+    // ignore: cascade_invocations
     context.register(() => 'test');
     expect(context.get<String>(), 'test');
   });
 
   test('inject context unregister', () async {
     final context = InjectContext();
+    // ignore: cascade_invocations
     context.register(() => 'test');
     expect(context.get<String>(), 'test');
 

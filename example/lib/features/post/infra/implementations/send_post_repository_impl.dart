@@ -9,7 +9,7 @@ class SendPostRepository implements ISendPostRepository {
   SendPostRepository(this.dataSource);
   @override
   Future<Either<Exception, RequestEntity>> postTest(
-      RequestEntity entity) async {
+      RequestEntity entity,) async {
     try {
       final result = await dataSource.postTest(entity);
 

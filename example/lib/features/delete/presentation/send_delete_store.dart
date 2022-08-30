@@ -16,8 +16,6 @@ class SendDeleteStore extends MobXStore<Exception, RequestEntity> {
     result.fold((l) {
       setError(l);
       setLoading(false);
-    }, (r) {
-      update(r);
-    });
+    }, update,);
   }
 }

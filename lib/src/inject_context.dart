@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_constructors_over_static_methods
+
 import 'package:universal_io/io.dart';
 
 import 'external/universal_http_client.dart';
@@ -25,10 +27,11 @@ class InjectContext {
 
   static InjectContext defaultConfig() {
     final context = InjectContext();
-    context.register<HttpClient>(() => HttpClient());
-    context.register<HttpDatasource>(() => UniversalHttpClient(context()));
-    context.register<HttpRepository>(() => HttpRepositoryImpl(context()));
-    context.register<Fetch>(() => FetchImpl(context()));
+    context
+      ..register<HttpClient>(() => HttpClient())
+      ..register<HttpDatasource>(() => UniversalHttpClient(context()))
+      ..register<HttpRepository>(() => HttpRepositoryImpl(context()))
+      ..register<Fetch>(() => FetchImpl(context()));
     return context;
   }
 

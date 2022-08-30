@@ -16,7 +16,7 @@ void main() {
    final entity = RequestEntity(body: 'Hello', title: 'post test', id: 1);
 
   group(SendPatchDataSource, () {
-    test('Should use a patch method', (() async {
+    test('Should use a patch method', () async {
       final request = Request(
         headers: const {'test': 'test'},
         method: 'patch',
@@ -24,7 +24,7 @@ void main() {
         uri: Uri.parse('https://jsonplaceholder.typicode.com/posts/${entity.id}'),
       );
 
-      when((() => uno.patch(any()))).thenAnswer(
+      when(() => uno.patch(any())).thenAnswer(
         (_) async => Response(
           headers: const {'test': 'test'},
           request: request,
@@ -35,6 +35,6 @@ void main() {
 
       final result = dataSource.sendPatch(entity);
       expect(result, completes);
-    }));
+    },);
   });
 }

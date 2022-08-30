@@ -1,9 +1,11 @@
+// ignore_for_file: parameter_assignments
+
 import 'dart:convert';
 
+import 'package:characters/characters.dart';
 import 'package:meta/meta.dart';
 import 'package:uno/src/domain/domain.dart';
 import 'package:uno/src/inject_context.dart';
-import 'package:characters/characters.dart';
 
 part 'interceptors.dart';
 
@@ -12,7 +14,8 @@ typedef DownloadCallback = void Function(int total, int current);
 /// This is a Http Client inspired by AxiosJS.
 abstract class Uno {
   /// `baseURL` will be prepended to `url` unless `url` is absolute.
-  /// It can be convenient to set `baseURL` for an instance of uno to pass relative URLs
+  /// It can be convenient to set `baseURL` for an instance of uno to
+  /// pass relative URLs
   /// to methods of that instance.
   String get baseURL;
 
@@ -75,7 +78,8 @@ abstract class Uno {
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
 
-    /// Represents the request method. ex: [GET, POST, PUT, DELETE, PATCH, HEAD].
+    /// Represents the request method.
+    /// ex: [GET, POST, PUT, DELETE, PATCH, HEAD].
     /// default is [get].
     String method = 'get',
 
@@ -120,7 +124,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -185,7 +190,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -245,7 +251,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -310,7 +317,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -375,7 +383,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -440,7 +449,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -505,7 +515,8 @@ abstract class Uno {
     /// ```
     DownloadCallback? onDownloadProgress,
 
-    /// Using the validateStatus config option, you can define HTTP code(s) that should throw an error.
+    /// Using the validateStatus config option,
+    /// you can define HTTP code(s) that should throw an error.
     /// ```dart
     /// axios.get('/user/12345', {
     ///   validateStatus: (status) {
@@ -554,7 +565,6 @@ class _Uno implements Uno {
   }) {
     return call(
       url: url,
-      method: 'get',
       params: params,
       headers: headers,
       responseType: responseType,
@@ -736,7 +746,7 @@ class _Uno implements Uno {
   FutureOr<Response> request(Request request) async {
     request = await interceptors.request._resolve(request);
     final fetch = context<Fetch>();
-    var result = await fetch(request: request);
+    final result = await fetch(request: request);
 
     return await result.fold((l) async {
       final resolved = await interceptors.response._resolveError(l);
@@ -745,7 +755,7 @@ class _Uno implements Uno {
       }
       throw resolved;
     }, (r) async {
-      return await interceptors.response._resolve(r);
+      return interceptors.response._resolve(r);
     });
   }
 
@@ -756,11 +766,11 @@ class _Uno implements Uno {
 
     final buffer = StringBuffer('?');
 
-    for (var key in params.keys) {
+    for (final key in params.keys) {
       buffer.write('$key=${params[key]}&');
     }
 
-    var encoded = buffer.toString();
+    final encoded = buffer.toString();
     return (encoded.characters.toList()..removeLast()).join();
   }
 }
