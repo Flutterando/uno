@@ -9,6 +9,7 @@ import 'package:uno/src/inject_context.dart';
 
 part 'interceptors.dart';
 
+///[DownloadCallback] it's a typedef of void Function(int total, int current)
 typedef DownloadCallback = void Function(int total, int current);
 
 /// This is a Http Client inspired by AxiosJS.
@@ -46,6 +47,8 @@ abstract class Uno {
   Interceptors get interceptors;
 
   @visibleForTesting
+
+  ///The get [context] it's the type [InjectContext]
   InjectContext get context;
 
   /// Creating an instance of Uno with new global options

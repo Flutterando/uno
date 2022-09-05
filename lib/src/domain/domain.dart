@@ -16,4 +16,5 @@ export 'errors/errors.dart';
 export 'repositories/http_repository.dart';
 export 'usecases/fetch.dart';
 
+///[FetchCallback] it's a typedef of FutureOr<Either<UnoError, Response>>
 typedef FetchCallback = FutureOr<Either<UnoError, Response>>;

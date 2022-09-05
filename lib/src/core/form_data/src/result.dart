@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'entry.dart';
 
+///[FormDataResult] class
 class FormDataResult {
   final List<Entry> _entries;
 

@@ -18,6 +18,7 @@ class FormData {
 
   final List<Entry> _entries = [];
 
+  ///[FormData] constructor
   FormData({this.encoding = utf8});
 
   /// Add a field [name] to the form data.
