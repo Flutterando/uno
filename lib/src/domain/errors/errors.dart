@@ -8,19 +8,19 @@ import 'package:uno/uno.dart';
 ///the [stackTrace] is different from null, if it is, returns it as a string
 ///otherwise, returns an empty string
 class UnoError<TData> implements Exception {
-  ///The varieble [message] it's the type String
+  ///The variable [message] it's the type String
   final String message;
 
-  ///The varieble [data] it's the type TData
+  ///The variable [data] it's the type TData
   final TData? data;
 
-  ///The varieble [stackTrace] it's the type StackTrace
+  ///The variable [stackTrace] it's the type StackTrace
   final StackTrace? stackTrace;
 
-  ///The varieble [request] it's the type Request
+  ///The variable [request] it's the type Request
   final Request? request;
 
-  ///The varieble [response] it's the type Response
+  ///The variable [response] it's the type Response
   final Response? response;
 
   ///[UnoError] constructor class

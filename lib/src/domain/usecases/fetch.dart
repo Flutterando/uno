@@ -1,6 +1,6 @@
 import '../domain.dart';
 
-///[Fetch] abstract class recive the method named [call] it's
+///[Fetch] abstract class receive the method named [call] it's
 ///the type FetchCallBack
 abstract class Fetch {
   ///this method receive a [Request]

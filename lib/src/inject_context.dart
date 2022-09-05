@@ -11,7 +11,7 @@ class InjectContext {
   final Map<Type, dynamic> _injections = {};
 
   ///The method [register] it's the type void
-  ///recive for params the function [value] and recive
+  ///receive for params the function [value] and receive
   ///_injections[_getType<T>()] = value
   void register<T extends Object>(T Function() value) {
     _injections[_getType<T>()] = value;
@@ -23,7 +23,7 @@ class InjectContext {
 
   ///The method [get] has a return of type generics [T]
   T get<T extends Object>() {
-    /// The variable [type] recive _getType<T>()
+    /// The variable [type] receive _getType<T>()
     final type = _getType<T>();
 
     ///Verify if _injections.containsKey(type) and
@@ -36,7 +36,7 @@ class InjectContext {
   }
 
   ///The method [unregister] it's the type void
-  /// and recive _injections.remove(_getType<T>());
+  /// and receive _injections.remove(_getType<T>());
   void unregister<T extends Object>() {
     _injections.remove(_getType<T>());
   }
@@ -53,7 +53,7 @@ class InjectContext {
   }
 
   ///The method [clear] it's the type void
-  /// and recive _injections.clear();
+  /// and receive _injections.clear();
   void clear() => _injections.clear();
 
   Type _getType<T>() => T;
