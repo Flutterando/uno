@@ -47,8 +47,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   modular_test: ^2.0.0
-  flutterando_analysis: 
-    git: https://github.com/Flutterando/flutterando_analysis.git
+  flutterando_analysis: ^0.0.1
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
