@@ -1,5 +1,6 @@
 import 'dart:math';
 
+///The function [generateBoundary] it's the type string
 String generateBoundary() {
   final random = Random();
 

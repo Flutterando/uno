@@ -15,6 +15,7 @@ class Response {
   /// Headers of response.
   final Map<String, String> headers;
 
+  ///[Response] constructor class
   const Response({
     required this.headers,
     required this.request,

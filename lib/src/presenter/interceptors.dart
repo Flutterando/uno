@@ -2,6 +2,7 @@
 
 part of 'uno_base.dart';
 
+///[Interceptors] class
 class Interceptors {
   /// Manage request interceptors.
   ///
