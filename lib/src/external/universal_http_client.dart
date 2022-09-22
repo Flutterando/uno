@@ -5,6 +5,7 @@ import 'package:universal_io/io.dart';
 import '../infra/infra.dart';
 
 ///Created the class [UniversalHttpClient] that implements [HttpDatasource]
+/// [UniversalHttpClient] implements the [fetch] method from [HttpDatasource]
 class UniversalHttpClient implements HttpDatasource {
   ///An HTTP client for communicating with an HTTP server.
   ///Sends HTTP requests to an HTTP server and receives responses.
@@ -15,7 +16,6 @@ class UniversalHttpClient implements HttpDatasource {
   ///The [UniversalHttpClient] constructor
   const UniversalHttpClient(this.client);
 
-  /// [UniversalHttpClient] implements the [fetch] method from [HttpDatasource]
   /// [fetch] method receives as it's parameter the [Request][unoRequest]
   /// It sets the client.connectionTimeout value the timeout value
   /// received in unoRequest
@@ -39,31 +39,7 @@ class UniversalHttpClient implements HttpDatasource {
   /// returns unoResponse
   /// If a [SocketException] occurs, a throw will be called with the information
   /// about the occured error.
-  ///
-  /// the [dynamic] method [_convertResponseData] receives as a parameter
-  /// a [Stream<List<int>] mainStream
-  /// a [ResponseType] responseType and a [Request] request
-  /// Verifies if responseType is equal to [ResponseType.json]
-  /// Opens a try/catch bloc, it will try store in the buffer a [StringBuffer] and
-  /// for each item in [mainStream.transform(utf8.decoder)] will add the string
-  /// representation of the object
-  /// return the [buffer.toString()] converting it to json
-  /// if a [FormatException] occurs, a throw will be called with the information
-  /// about the occured error.
-  /// else if the responseType is equal to [ResponseType.plain]
-  /// Opens a try/catch bloc, it will try store in the buffer a [StringBuffer] and
-  /// for each item in [mainStream.transform(utf8.decoder)]
-  /// will add the string
-  /// representation of the object
-  /// return the [buffer.toString()]
-  /// if a [FormatException] occurs, a throw will be called with the information
-  /// about the occured error.
-  /// else if the responseType is equal to [ResponseType.arraybuffer]
-  /// the variable bytes will be an int [List]
-  /// for each b in mainStream, a b will be added into the bytes list
-  /// returns bytes
-  /// else if responseType is equal to [ResponseType.stream]
-  /// returns mainStream.
+
   @override
   Future<Response> fetch(Request unoRequest) async {
     client.connectionTimeout = unoRequest.timeout;
@@ -120,7 +96,30 @@ class UniversalHttpClient implements HttpDatasource {
       );
     }
   }
-
+/// the [dynamic] method [_convertResponseData] receives as a parameter
+  /// a [Stream<List<int>] mainStream
+  /// a [ResponseType] responseType and a [Request] request
+  /// Verifies if responseType is equal to [ResponseType.json]
+  /// Opens a try/catch bloc, it will try store in the buffer a [StringBuffer] and
+  /// for each item in [mainStream.transform(utf8.decoder)] will add the string
+  /// representation of the object
+  /// return the [buffer.toString()] converting it to json
+  /// if a [FormatException] occurs, a throw will be called with the information
+  /// about the occured error.
+  /// else if the responseType is equal to [ResponseType.plain]
+  /// Opens a try/catch bloc, it will try store in the buffer a [StringBuffer] and
+  /// for each item in [mainStream.transform(utf8.decoder)]
+  /// will add the string
+  /// representation of the object
+  /// return the [buffer.toString()]
+  /// if a [FormatException] occurs, a throw will be called with the information
+  /// about the occured error.
+  /// else if the responseType is equal to [ResponseType.arraybuffer]
+  /// the variable bytes will be an int [List]
+  /// for each b in mainStream, a b will be added into the bytes list
+  /// returns bytes
+  /// else if responseType is equal to [ResponseType.stream]
+  /// returns mainStream.
   dynamic _convertResponseData(
     Stream<List<int>> mainStream,
     ResponseType responseType,
