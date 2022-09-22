@@ -14,7 +14,7 @@ void main() {
   runApp(ModularApp(
     module: AppModule(),
     child: const MyApp(),
-  ));
+  ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onLoading: (_) => const Center(
           child: CircularProgressIndicator(),
         ),
-        onState: ((_, List state) {
+        onState: (_, List state) {
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -146,10 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: () {
-                              storeBtnPost.sendPost();
-                            },
-                            child: const Text('Post test')),
+                            onPressed: storeBtnPost.sendPost,
+                            child: const Text('Post test'),),
                         Text('http status response:${state.status}'),
                       ],
                     );
@@ -172,10 +170,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: () {
-                              storeBtnDelete.sendDelete();
-                            },
-                            child: const Text('Delete test')),
+                            onPressed: storeBtnDelete.sendDelete,
+                            child: const Text('Delete test'),),
                         Text('http status response:${state.status.toString()}'),
                       ],
                     );
@@ -198,10 +194,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: () {
-                              storeBtnPatch.sendPatch();
-                            },
-                            child: const Text('Patch test')),
+                            onPressed: storeBtnPatch.sendPatch,
+                            child: const Text('Patch test'),),
                         Text('http status response:${state.status.toString()}'),
                       ],
                     );
@@ -224,10 +218,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: () {
-                              storeBtnPut.sendPut();
-                            },
-                            child: const Text('Put test')),
+                            onPressed: storeBtnPut.sendPut,
+                            child: const Text('Put test'),),
                         Text('http status response:${state.status.toString()}'),
                         const SizedBox(
                           height: 15,
@@ -235,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         const Text('API powered by {JSON} Placeholder',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                            ))
+                            ),)
                       ],
                     );
                   },
@@ -243,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           );
-        }),
+        },
       ),
     );
   }

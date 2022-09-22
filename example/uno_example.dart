@@ -1,12 +1,13 @@
-import 'package:universal_io/io.dart';
-import 'package:uno/src/presenter/uno_base.dart';
+import 'package:flutter/material.dart';
 import 'package:uno/uno.dart';
 
 void main() async {
   final uno = Uno();
-  final response = await uno.get('http://localhost:8080/spoiler.png',
-      responseType: ResponseType.arraybuffer);
-  print(response.data);
+  final response = await uno.get(
+    'http://localhost:8080/spoiler.png',
+    responseType: ResponseType.arraybuffer,
+  );
+  debugPrint(response.data);
 
   //final uno = Uno();
 

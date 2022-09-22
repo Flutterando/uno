@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'entry.dart';
 
+///[FormDataResult] class
 class FormDataResult {
   final List<Entry> _entries;
 
@@ -24,46 +25,53 @@ class FormDataResult {
   static final List<int> _contentDispositionPrefix =
       utf8.encode('Content-Disposition: form-data; name="');
   static final List<int> _contentDispositionPostfix = utf8.encode('"');
-  static final List<int> _contentDispositionInfix =
-      utf8.encode('"; filename="');
+  static final List<int> _contentDispositionInfix = utf8.encode(
+    '"; filename="',
+  );
   static final List<int> _contentTypePrefix = utf8.encode('Content-Type: ');
 
+  // ignore: public_member_api_docs
   FormDataResult(this._entries, this.boundary)
       : _midBoundary = utf8.encode('--$boundary\r\n'),
         _endBoundary = utf8.encode('--$boundary--\r\n') {
-    var _body = <int>[];
+    final _body = <int>[];
 
-    for (var entry in _entries) {
-      _body.addAll(_midBoundary);
-      _body.addAll(_contentDispositionPrefix);
-      _body.addAll(entry.name);
+    for (final entry in _entries) {
+      _body
+        ..addAll(_midBoundary)
+        ..addAll(_contentDispositionPrefix)
+        ..addAll(entry.name);
 
-      var value = entry.value;
+      final value = entry.value;
       if (value is File) {
-        var filename = value.filename;
+        final filename = value.filename;
 
         if (filename != null) {
-          _body.addAll(_contentDispositionInfix);
-          _body.addAll(filename);
+          _body
+            ..addAll(_contentDispositionInfix)
+            ..addAll(filename);
         }
       }
 
-      _body.addAll(_contentDispositionPostfix);
-      _body.addAll(_lineBreak);
+      _body
+        ..addAll(_contentDispositionPostfix)
+        ..addAll(_lineBreak);
 
       if (value is File) {
-        var contentType = value.contentType;
+        final contentType = value.contentType;
 
         if (contentType != null) {
-          _body.addAll(_contentTypePrefix);
-          _body.addAll(contentType);
-          _body.addAll(_lineBreak);
+          _body
+            ..addAll(_contentTypePrefix)
+            ..addAll(contentType)
+            ..addAll(_lineBreak);
         }
       }
 
-      _body.addAll(_lineBreak);
-      _body.addAll(entry.value.bytes);
-      _body.addAll(_lineBreak);
+      _body
+        ..addAll(_lineBreak)
+        ..addAll(entry.value.bytes)
+        ..addAll(_lineBreak);
     }
 
     _body.addAll(_endBoundary);

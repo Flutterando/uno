@@ -19,12 +19,12 @@ void main() {
     method: 'post',
     timeout: const Duration(seconds: 30),
     uri: Uri.parse(
-        'https://jsonplaceholder.typicode.com/posts/?title=${entity.title}&body=${entity.body}'),
+        'https://jsonplaceholder.typicode.com/posts/?title=${entity.title}&body=${entity.body}',),
   );
 
   group(SendPostDataSource, () {
-    test('Should use a post method', (() async {
-      when((() => uno.post(any()))).thenAnswer(
+    test('Should use a post method', () async {
+      when(() => uno.post(any())).thenAnswer(
         (_) async =>Response(
           headers: const {'test': 'test'},
           request: request,
@@ -32,8 +32,8 @@ void main() {
           data: jsonDecode(postResponse),
         ),
       );
-      var response = dataSource.postTest(entity);
+      final response = dataSource.postTest(entity);
       expect(response, completes);
-    }));
+    },);
   });
 }

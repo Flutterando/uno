@@ -25,16 +25,22 @@ void main() {
     test('universal http client consumer (JSON)', () async {
       final uri = Uri.parse('google.com');
       final request = Request(
-          uri: uri,
-          method: 'get',
-          headers: const {'test': 'test'},
-          timeout: Duration(seconds: 30));
-      when(() => httpHeadersMock.set('test', 'test')).thenReturn(true);
+        uri: uri,
+        method: 'get',
+        headers: const {'test': 'test'},
+        timeout: const Duration(seconds: 30),
+      );
+      when(() => httpHeadersMock.set('test', 'test')).thenReturn(
+        // ignore: void_checks
+        true,
+      );
       when(() => httpClientRequest.headers).thenReturn(httpHeadersMock);
-      when(() => httpClientRequest.close())
-          .thenAnswer((_) async => httpClientResponse);
-      when(() => httpClientMock.openUrl('get', uri))
-          .thenAnswer((_) async => httpClientRequest);
+      when(() => httpClientRequest.close()).thenAnswer(
+        (_) async => httpClientResponse,
+      );
+      when(() => httpClientMock.openUrl('get', uri)).thenAnswer(
+        (_) async => httpClientRequest,
+      );
 
       when(() => httpClientResponse.statusCode).thenReturn(200);
       when(() => httpClientResponse.headers).thenReturn(httpHeadersMock);
@@ -49,13 +55,15 @@ void main() {
         uri: uri,
         method: 'get',
         headers: const {},
-        timeout: Duration(seconds: 30),
+        timeout: const Duration(seconds: 30),
         responseType: ResponseType.plain,
       );
-      when(() => httpClientRequest.close())
-          .thenAnswer((_) async => httpClientResponse);
-      when(() => httpClientMock.openUrl('get', uri))
-          .thenAnswer((_) async => httpClientRequest);
+      when(() => httpClientRequest.close()).thenAnswer(
+        (_) async => httpClientResponse,
+      );
+      when(() => httpClientMock.openUrl('get', uri)).thenAnswer(
+        (_) async => httpClientRequest,
+      );
 
       when(() => httpClientResponse.statusCode).thenReturn(200);
       when(() => httpClientResponse.headers).thenReturn(httpHeadersMock);
@@ -69,13 +77,15 @@ void main() {
         uri: uri,
         method: 'get',
         headers: const {},
-        timeout: Duration(seconds: 30),
+        timeout: const Duration(seconds: 30),
         responseType: ResponseType.arraybuffer,
       );
-      when(() => httpClientRequest.close())
-          .thenAnswer((_) async => httpClientResponse);
-      when(() => httpClientMock.openUrl('get', uri))
-          .thenAnswer((_) async => httpClientRequest);
+      when(() => httpClientRequest.close()).thenAnswer(
+        (_) async => httpClientResponse,
+      );
+      when(() => httpClientMock.openUrl('get', uri)).thenAnswer(
+        (_) async => httpClientRequest,
+      );
 
       when(() => httpClientResponse.statusCode).thenReturn(200);
       when(() => httpClientResponse.headers).thenReturn(httpHeadersMock);
@@ -89,13 +99,15 @@ void main() {
         uri: uri,
         method: 'get',
         headers: const {},
-        timeout: Duration(seconds: 30),
+        timeout: const Duration(seconds: 30),
         responseType: ResponseType.stream,
       );
-      when(() => httpClientRequest.close())
-          .thenAnswer((_) async => httpClientResponse);
-      when(() => httpClientMock.openUrl('get', uri))
-          .thenAnswer((_) async => httpClientRequest);
+      when(() => httpClientRequest.close()).thenAnswer(
+        (_) async => httpClientResponse,
+      );
+      when(() => httpClientMock.openUrl('get', uri)).thenAnswer(
+        (_) async => httpClientRequest,
+      );
 
       when(() => httpClientResponse.statusCode).thenReturn(200);
       when(() => httpClientResponse.headers).thenReturn(httpHeadersMock);
@@ -115,14 +127,17 @@ void main() {
       uri: uri,
       method: 'get',
       headers: const {},
-      timeout: Duration(seconds: 30),
+      timeout: const Duration(seconds: 30),
       responseType: ResponseType.stream,
     );
 
-    when(() => httpClientMock.openUrl('get', uri))
-        .thenThrow(SocketException.closed());
+    when(() => httpClientMock.openUrl('get', uri)).thenThrow(
+      const SocketException.closed(),
+    );
 
-    expect(() async => await universalHttpClient.fetch(request),
-        throwsA(isA<UnoError>()));
+    expect(
+      () async => universalHttpClient.fetch(request),
+      throwsA(isA<UnoError>()),
+    );
   });
 }

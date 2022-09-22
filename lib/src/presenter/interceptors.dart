@@ -1,5 +1,8 @@
+// ignore_for_file: parameter_assignments
+
 part of 'uno_base.dart';
 
+///[Interceptors] class
 class Interceptors {
   /// Manage request interceptors.
   ///
@@ -69,11 +72,12 @@ class _InterceptorCallback<T> {
   /// final myInterceptor = uno.interceptors.request.use((request) {/*...*/});
   /// uno.interceptors.request.eject(myInterceptor);
   /// ```
-  void eject(_InterceptorResolver<T> interceptor) =>
-      _interceptors.remove(interceptor);
+  void eject(_InterceptorResolver<T> interceptor) => _interceptors.remove(
+        interceptor,
+      );
 
   Future<T> _resolve(T data) async {
-    for (var interceptor in _interceptors) {
+    for (final interceptor in _interceptors) {
       if (interceptor._runWhen?.call(data) == false) {
         continue;
       }
@@ -89,7 +93,7 @@ class _InterceptorCallback<T> {
   Future<dynamic> resolveErrorTest(UnoError error) => _resolveError(error);
 
   Future<dynamic> _resolveError(UnoError error) async {
-    for (var interceptor in _interceptors) {
+    for (final interceptor in _interceptors) {
       final data = await interceptor._errorResolve?.call(error);
       if (data is Response) {
         return data;
