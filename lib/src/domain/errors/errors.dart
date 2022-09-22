@@ -34,6 +34,6 @@ class UnoError<TData> implements Exception {
 
   @override
   String toString() {
-    return ''''UnoError: $message\n${request.toString()}${stackTrace != null ? '\n\n$stackTrace' : ''}''';
+    return ''''UnoError: $message\n$request${stackTrace != null ? '\n\n$stackTrace' : ''}''';
   }
 }

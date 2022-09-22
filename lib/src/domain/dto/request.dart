@@ -118,7 +118,7 @@ class Request {
 
   @override
   String toString() {
-    return 'url: ${uri.toString()}, method: $method';
+    return 'url: $uri, method: $method';
   }
 }
 

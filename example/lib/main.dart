@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ElevatedButton(
                             onPressed: storeBtnDelete.sendDelete,
                             child: const Text('Delete test'),),
-                        Text('http status response:${state.status.toString()}'),
+                        Text('http status response:${state.status}'),
                       ],
                     );
                   },
@@ -196,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ElevatedButton(
                             onPressed: storeBtnPatch.sendPatch,
                             child: const Text('Patch test'),),
-                        Text('http status response:${state.status.toString()}'),
+                        Text('http status response:${state.status}'),
                       ],
                     );
                   },
@@ -220,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ElevatedButton(
                             onPressed: storeBtnPut.sendPut,
                             child: const Text('Put test'),),
-                        Text('http status response:${state.status.toString()}'),
+                        Text('http status response:${state.status}'),
                         const SizedBox(
                           height: 15,
                         ),
