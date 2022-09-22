@@ -205,7 +205,7 @@ Thank you to all the people who contributed to this project, whithout you this p
 <br>
 <p align="center">
   <a href="https://www.flutterando.com.br">
-    <img width="110px" src="https://raw.githubusercontent.com/Flutterando/uno/master/images/sponsor-logo.png">
+    <img width="110px" src="https://raw.githubusercontent.com/Flutterando/uno/master/images/logo-flutterando.png">
   </a>
   <p align="center">
     Built and maintained by <a href="https://www.flutterando.com.br">Flutterando</a>.
