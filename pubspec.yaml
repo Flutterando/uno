@@ -1,5 +1,5 @@
 name: uno
-description: Uno is a multiplatform HTTP client, based on Axios and built following the Clean Dart approach by the Flutterando Community. It is a simple and hassle free solution while still bringing everything you need and a bit more in a HTTP client.
+description: Uno is a multiplatform HTTP client, based on Axios and built following the Clean Dart approach by the Flutterando Community.
 version: 1.0.1+3
 homepage: https://github.com/Flutterando/uno.git
 
