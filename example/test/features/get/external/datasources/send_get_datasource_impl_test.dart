@@ -14,25 +14,28 @@ void main() {
   final dataSource = SendGetDataSource(uno);
 
   group(SendGetDataSource, () {
-    test('Should use a get method', () async {
-      final request = Request(
-        headers: const {'test': 'test'},
-        method: 'get',
-        timeout: const Duration(seconds: 30),
-        uri: Uri.parse('https://jsonplaceholder.typicode.com/posts/'),
-      );
-
-      when(() => uno.get(any())).thenAnswer(
-        (_) async => Response(
+    test(
+      'Should use a get method',
+      () async {
+        final request = Request(
           headers: const {'test': 'test'},
-          request: request,
-          status: 200,
-          data: jsonDecode(api),
-        ),
-      );
+          method: 'get',
+          timeout: const Duration(seconds: 30),
+          uri: Uri.parse('https://jsonplaceholder.typicode.com/posts/'),
+        );
 
-      final result = dataSource.sendGet();
-      expect(result, completes);
-    },);
+        when(() => uno.get(any())).thenAnswer(
+          (_) async => Response(
+            headers: const {'test': 'test'},
+            request: request,
+            status: 200,
+            data: jsonDecode(api),
+          ),
+        );
+
+        final result = dataSource.sendGet();
+        expect(result, completes);
+      },
+    );
   });
 }

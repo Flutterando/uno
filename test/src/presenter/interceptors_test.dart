@@ -9,13 +9,16 @@ void main() {
     var errorFn = 0;
 
     final interceptors = Interceptors();
-    final resolver = interceptors.request.use((request) {
-      requestFn++;
-      return request;
-    }, onError: (error) {
-      errorFn++;
-      return error;
-    },);
+    final resolver = interceptors.request.use(
+      (request) {
+        requestFn++;
+        return request;
+      },
+      onError: (error) {
+        errorFn++;
+        return error;
+      },
+    );
     interceptors.request.use((request) {
       requestFn++;
       return request;

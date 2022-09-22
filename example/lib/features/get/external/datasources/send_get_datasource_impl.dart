@@ -13,7 +13,8 @@ class SendGetDataSource implements ISendGetDataSource {
   @override
   Future<List<dynamic>> sendGet() async {
     try {
-      final response = await uno.get('https://jsonplaceholder.typicode.com/posts');
+      final response =
+          await uno.get('https://jsonplaceholder.typicode.com/posts');
       if (response.status == 200) {
         // ignore: unnecessary_parenthesis
         final list = ((response.data as List)

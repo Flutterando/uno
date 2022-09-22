@@ -12,7 +12,8 @@ class SendPutDataSource implements ISendPutDataSource {
   @override
   Future<RequestEntity> sendPut(RequestEntity entity) async {
     try {
-      final response = await uno.put('https://jsonplaceholder.typicode.com/posts/${entity.id}');
+      final response = await uno
+          .put('https://jsonplaceholder.typicode.com/posts/${entity.id}');
       if (response.status != 404) {
         return RequestEntity(
           title: 'title',

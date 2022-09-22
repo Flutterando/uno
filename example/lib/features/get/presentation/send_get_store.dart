@@ -11,9 +11,12 @@ class GetFactStore extends MobXStore<Exception, List<dynamic>> {
     setLoading(true);
     await Future.delayed(const Duration(seconds: 2));
     final result = await usecase.sendGet();
-    result.fold((l) {
-      setError(l);
-      setLoading(false);
-    }, update,);
+    result.fold(
+      (l) {
+        setError(l);
+        setLoading(false);
+      },
+      update,
+    );
   }
 }

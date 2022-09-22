@@ -5,7 +5,7 @@ import '../domain/usecases/send_post_usecase.dart';
 
 class SendPostStore extends StreamStore<Exception, RequestEntity> {
   final ISendPost usecase;
-  SendPostStore(this.usecase) : super(RequestEntity(body:'' ,title: ''));
+  SendPostStore(this.usecase) : super(RequestEntity(body: '', title: ''));
 
   Future<void> sendPost() async {
     setLoading(true);

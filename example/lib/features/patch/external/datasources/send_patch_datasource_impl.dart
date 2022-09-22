@@ -12,7 +12,8 @@ class SendPatchDataSource implements ISendPatchDataSource {
   @override
   Future<RequestEntity> sendPatch(RequestEntity entity) async {
     try {
-      final response = await uno.patch('https://jsonplaceholder.typicode.com/posts/${entity.id}');
+      final response = await uno
+          .patch('https://jsonplaceholder.typicode.com/posts/${entity.id}');
       if (response.status != 404) {
         return RequestEntity(
           title: 'title',

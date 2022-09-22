@@ -16,7 +16,10 @@ class SendDeleteDataSource implements ISendDeleteDataSource {
           .delete('https://jsonplaceholder.typicode.com/posts/${entity.id}');
       if (response.status != 404) {
         return RequestEntity(
-            title: 'title', body: 'body', status: response.status,);
+          title: 'title',
+          body: 'body',
+          status: response.status,
+        );
       } else {
         throw Exception();
       }

@@ -11,10 +11,12 @@ import 'features/post/presentation/send_post_store.dart';
 import 'features/put/presentations/send_put_store.dart';
 
 void main() {
-  runApp(ModularApp(
-    module: AppModule(),
-    child: const MyApp(),
-  ),);
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -146,8 +148,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: storeBtnPost.sendPost,
-                            child: const Text('Post test'),),
+                          onPressed: storeBtnPost.sendPost,
+                          child: const Text('Post test'),
+                        ),
                         Text('http status response:${state.status}'),
                       ],
                     );
@@ -170,10 +173,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: storeBtnDelete.sendDelete,
-                            child: const Text('Delete test'),),
+                          onPressed: storeBtnDelete.sendDelete,
+                          child: const Text('Delete test'),
+                        ),
                         Text('http status response:${state.status}'),
-
                       ],
                     );
                   },
@@ -195,10 +198,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: storeBtnPatch.sendPatch,
-                            child: const Text('Patch test'),),
+                          onPressed: storeBtnPatch.sendPatch,
+                          child: const Text('Patch test'),
+                        ),
                         Text('http status response:${state.status}'),
-
                       ],
                     );
                   },
@@ -220,17 +223,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Column(
                       children: [
                         ElevatedButton(
-                            onPressed: storeBtnPut.sendPut,
-                            child: const Text('Put test'),),
+                          onPressed: storeBtnPut.sendPut,
+                          child: const Text('Put test'),
+                        ),
                         Text('http status response:${state.status}'),
-
                         const SizedBox(
                           height: 15,
                         ),
-                        const Text('API powered by {JSON} Placeholder',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),)
+                        const Text(
+                          'API powered by {JSON} Placeholder',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
                       ],
                     );
                   },

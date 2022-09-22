@@ -11,7 +11,8 @@ class SendDeleteRepository implements ISendDeleteRepository {
 
   @override
   Future<Either<Exception, RequestEntity>> sendDelete(
-      RequestEntity entity,) async {
+    RequestEntity entity,
+  ) async {
     try {
       final result = await dataSource.sendDelete(entity);
 
