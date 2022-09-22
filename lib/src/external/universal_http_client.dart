@@ -6,7 +6,6 @@ import '../infra/infra.dart';
 
 ///Created the class [UniversalHttpClient] that implements [HttpDatasource]
 /// [UniversalHttpClient] implements the [fetch] method from [HttpDatasource]
-
 class UniversalHttpClient implements HttpDatasource {
   ///An HTTP client for communicating with an HTTP server.
   ///Sends HTTP requests to an HTTP server and receives responses.
@@ -40,7 +39,7 @@ class UniversalHttpClient implements HttpDatasource {
   /// returns unoResponse
   /// If a [SocketException] occurs, a throw will be called with the information
   /// about the occured error.
-  
+
   @override
   Future<Response> fetch(Request unoRequest) async {
     client.connectionTimeout = unoRequest.timeout;
