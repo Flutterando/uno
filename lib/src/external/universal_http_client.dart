@@ -96,7 +96,8 @@ class UniversalHttpClient implements HttpDatasource {
       );
     }
   }
-/// the [dynamic] method [_convertResponseData] receives as a parameter
+
+  /// the [dynamic] method [_convertResponseData] receives as a parameter
   /// a [Stream<List<int>] mainStream
   /// a [ResponseType] responseType and a [Request] request
   /// Verifies if responseType is equal to [ResponseType.json]

@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://pub.dev/packages/uno">
-    <img src="images/logo.png" alt="Logo" width="120">
+    <img src="https://raw.githubusercontent.com/Flutterando/uno/master/images/logo.png" alt="Logo" width="120">
   </a>
 
   <p align="center">
@@ -60,7 +60,7 @@
 
 <br>
 <Center>
-<img src="images/Example-uno.png" alt="Uno PNG" width="400">
+<img src="https://raw.githubusercontent.com/Flutterando/uno/master/images/Example-uno.png" alt="Uno PNG" width="400">
 </Center>
 
 <br>
@@ -75,7 +75,7 @@ It is a simple and hassle free solution while still bringing everything you need
 ## Sponsors
 
 <a href="https://fteam.dev">
-    <img src="images/sponsor-logo.png" alt="Logo" width="120">
+    <img src="https://raw.githubusercontent.com/Flutterando/uno/master/images/sponsor-logo.png" alt="Logo" width="120">
   </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -205,7 +205,7 @@ Thank you to all the people who contributed to this project, whithout you this p
 <br>
 <p align="center">
   <a href="https://www.flutterando.com.br">
-    <img width="110px" src="images/logo-flutterando.png">
+    <img width="110px" src="https://raw.githubusercontent.com/Flutterando/uno/master/images/logo-flutterando.png">
   </a>
   <p align="center">
     Built and maintained by <a href="https://www.flutterando.com.br">Flutterando</a>.
