@@ -81,10 +81,9 @@ class UniversalHttpClient implements HttpDatasource {
           case 'text/plain':
             unoRequest.responseType = ResponseType.plain;
             break;
-          default:
-            unoRequest.responseType = ResponseType.plain;
-            break;
         }
+      } else {
+        unoRequest.responseType = ResponseType.plain;
       }
 
       final data = await _convertResponseData(
