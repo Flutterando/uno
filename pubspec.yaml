@@ -1,7 +1,7 @@
-name: uno_terandium
+name: uno
 description: Uno is a multiplatform HTTP client, based on Axios and built following the Clean Dart approach by the Flutterando Community.
 version: 1.0.1+5
-homepage: https://github.com/Terandium/uno.git
+homepage: https://github.com/Flutterando/uno.git
 
 environment:
   sdk: '>=2.13.0 <3.0.0'
