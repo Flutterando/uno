@@ -68,17 +68,27 @@ class UniversalHttpClient implements HttpDatasource {
         ),
       );
 
-      final data = await _convertResponseData(
-        mainStream,
-        unoRequest.responseType,
-        unoRequest,
-      );
-
       final headers = <String, String>{};
 
       response.headers.forEach((key, values) {
         headers[key] = values.join(',');
       });
+      if( headers.containsKey('Content-Type')) {
+        switch(headers['Content-Type']) {
+          case 'application/json':
+            unoRequest.responseType = ResponseType.json;
+            break;
+          case 'text/plain':
+            unoRequest.responseType = ResponseType.plain;
+            break;
+        }
+      }
+
+      final data = await _convertResponseData(
+        mainStream,
+        unoRequest.responseType,
+        unoRequest,
+      );
 
       final unoResponse = Response(
         request: unoRequest,
