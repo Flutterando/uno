@@ -10,7 +10,7 @@ import 'features/delete/presentation/send_delete_store.dart';
 import 'features/post/presentation/send_post_store.dart';
 import 'features/put/presentations/send_put_store.dart';
 
-void main() {
+void main() async {
   runApp(
     ModularApp(
       module: AppModule(),

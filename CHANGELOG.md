@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1.0
+
+- Improved documentation.
+- Added post with form-urlencoded.
+
 ## v1.0.0+4
 
 - Improved documentation

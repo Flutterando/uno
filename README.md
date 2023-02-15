@@ -140,6 +140,69 @@ Right now this package has concluded all his intended features. If you have any 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+****
+## Use cases
+
+**Send post json**
+
+```Dart
+final json = {
+  'name': 'Joshua',
+  'lastName': 'Baxter'
+};
+
+await uno.post('/user', data: json);
+```
+
+**Send post form urlencoded**
+
+```Dart
+final data = {
+  'name': 'Joshua',
+  'lastName': 'Baxter'
+};
+
+await uno.post('/user', headers: {
+     HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
+    },
+    data: data,
+);
+```
+
+**Send Multipart form**
+
+```Dart
+final formData = FormData();
+formData.add('name', 'Maira');
+formData.add('lastName', 'Moura');
+
+await uno.post('/user', data: formData);
+```
+
+**Upload file with multipart**
+
+```Dart
+final formData = FormData();
+formData.addFile('file', 'image/profile.png');
+
+await uno.post('/upload', data: formData);
+```
+
+**Download file**
+
+```Dart
+  final response = await uno.get(
+    'file.csv',
+    responseType: ResponseType.arraybuffer,
+    onDownloadProgress: (total, current) {
+      print((current * total) / 100);
+    },
+  );
+  
+  final bytes = response.data as List<int>;
+  final file = File('localFile.csv');
+  await file.writeAsBytes(bytes);
+```
 
 
 <!-- CONTRIBUTING -->

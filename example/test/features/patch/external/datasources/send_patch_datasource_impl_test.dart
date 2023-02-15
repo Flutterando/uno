@@ -24,7 +24,8 @@ void main() {
           method: 'patch',
           timeout: const Duration(seconds: 30),
           uri: Uri.parse(
-              'https://jsonplaceholder.typicode.com/posts/${entity.id}'),
+            'https://jsonplaceholder.typicode.com/posts/${entity.id}',
+          ),
         );
 
         when(() => uno.patch(any())).thenAnswer(

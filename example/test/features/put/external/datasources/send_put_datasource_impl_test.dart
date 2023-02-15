@@ -24,7 +24,8 @@ void main() {
           method: 'put',
           timeout: const Duration(seconds: 30),
           uri: Uri.parse(
-              'https://jsonplaceholder.typicode.com/posts/${entity.id}'),
+            'https://jsonplaceholder.typicode.com/posts/${entity.id}',
+          ),
         );
 
         when(() => uno.put(any())).thenAnswer(

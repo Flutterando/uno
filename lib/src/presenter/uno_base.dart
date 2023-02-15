@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:characters/characters.dart';
 import 'package:meta/meta.dart';
+import 'package:universal_io/io.dart';
 import 'package:uno/src/domain/domain.dart';
 import 'package:uno/src/inject_context.dart';
 
@@ -147,7 +148,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> get(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -208,7 +208,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> post(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -274,7 +273,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> put(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -340,7 +338,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> delete(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -406,7 +403,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> patch(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -472,7 +468,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> head(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -707,7 +702,7 @@ class _Uno implements Uno {
     ValidateCallback? validateStatus,
     dynamic data,
   }) async {
-    url = '$baseURL$url${_encodeParamsToQueries(params)}';
+    url = '&$baseURL$url${_encodeParamsToQueries(params)}';
 
     final _headers = <String, String>{}
       ..addAll(this.headers)
@@ -730,8 +725,17 @@ class _Uno implements Uno {
     }
 
     if (data is Map) {
-      final json = jsonEncode(data);
-      final bytes = utf8.encode(json);
+      var value = '';
+      if (headers.containsKey(HttpHeaders.contentTypeHeader)) {
+        final contentType = headers[HttpHeaders.contentTypeHeader]!;
+        if (contentType.contains('x-www-form-urlencoded')) {
+          value = _encodeParamsToQueries(data.cast());
+        }
+      } else {
+        value = jsonEncode(data);
+      }
+
+      final bytes = utf8.encode(value);
       _headers.addAll({'content-length': '${bytes.length}'});
       myRequest = myRequest.copyWith(bodyBytes: bytes, headers: _headers);
     }
@@ -762,17 +766,18 @@ class _Uno implements Uno {
     });
   }
 
-  String _encodeParamsToQueries(Map<String, String> params) {
+  String _encodeParamsToQueries(
+    Map<String, String> params,
+  ) {
     if (params.isEmpty) {
       return '';
     }
-
-    final buffer = StringBuffer('?');
-
+    final buffer = StringBuffer();
     for (final key in params.keys) {
-      buffer.write('$key=${params[key]}&');
+      final value = params[key];
+      final query = '$key=${Uri.encodeQueryComponent(value.toString())}&';
+      buffer.write(query);
     }
-
     final encoded = buffer.toString();
     return (encoded.characters.toList()..removeLast()).join();
   }
