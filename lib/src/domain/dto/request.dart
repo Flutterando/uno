@@ -45,7 +45,7 @@ class Request {
   /// ResponseType.arraybuffer
   /// ResponseType.stream
   /// ```
-  final ResponseType responseType;
+  ResponseType responseType;
 
   /// Callback from API to client about request`s upload.
   /// ```dart
