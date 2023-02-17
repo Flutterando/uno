@@ -39,7 +39,6 @@ class UniversalHttpClient implements HttpDatasource {
   /// returns unoResponse
   /// If a [SocketException] occurs, a throw will be called with the information
   /// about the occured error.
-
   @override
   Future<Response> fetch(Request unoRequest) async {
     client.connectionTimeout = unoRequest.timeout;
@@ -73,22 +72,28 @@ class UniversalHttpClient implements HttpDatasource {
       response.headers.forEach((key, values) {
         headers[key] = values.join(',');
       });
-      if( headers.containsKey('Content-Type')) {
-        switch(headers['Content-Type']) {
-          case 'application/json':
-            unoRequest.responseType = ResponseType.json;
-            break;
-          case 'text/plain':
-            unoRequest.responseType = ResponseType.plain;
-            break;
+
+      if (unoRequest.responseType == null) {
+        if (headers.containsKey(HttpHeaders.contentTypeHeader)) {
+          final content = headers[HttpHeaders.contentTypeHeader]!;
+          if (content.contains('application/json')) {
+            unoRequest = unoRequest.copyWith(
+              responseType: ResponseType.json,
+            );
+          } else {
+            unoRequest = unoRequest.copyWith(
+              responseType: ResponseType.plain,
+            );
+          }
+        } else {
+          unoRequest = unoRequest.copyWith(
+            responseType: ResponseType.plain,
+          );
         }
-      } else {
-        unoRequest.responseType = ResponseType.plain;
       }
 
       final data = await _convertResponseData(
         mainStream,
-        unoRequest.responseType,
         unoRequest,
       );
 
@@ -135,9 +140,9 @@ class UniversalHttpClient implements HttpDatasource {
   /// returns mainStream.
   dynamic _convertResponseData(
     Stream<List<int>> mainStream,
-    ResponseType responseType,
     Request request,
   ) async {
+    final responseType = request.responseType!;
     if (responseType == ResponseType.json) {
       try {
         final buffer = StringBuffer();

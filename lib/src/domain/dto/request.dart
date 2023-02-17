@@ -45,7 +45,7 @@ class Request {
   /// ResponseType.arraybuffer
   /// ResponseType.stream
   /// ```
-  ResponseType responseType;
+  final ResponseType? responseType;
 
   /// Callback from API to client about request`s upload.
   /// ```dart
@@ -83,7 +83,7 @@ class Request {
     ValidateCallback? validateStatus,
     this.bodyBytes = const [],
     required this.timeout,
-    this.responseType = ResponseType.json,
+    this.responseType,
     this.onDownloadProgress,
   }) {
     this.validateStatus = validateStatus ??

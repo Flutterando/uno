@@ -1,2 +1,5 @@
-include: package:flutterando_analysis/flutter_package.yaml
+include: package:flutterando_analysis/dart_package.yaml
 
+linter:
+  rules:
+    parameter_assignments: false
