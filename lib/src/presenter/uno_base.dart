@@ -702,7 +702,7 @@ class _Uno implements Uno {
     ValidateCallback? validateStatus,
     dynamic data,
   }) async {
-    url = '&$baseURL$url${_encodeParamsToQueries(params)}';
+    url = '$baseURL$url${_encodeParamsToQueries(params)}';
 
     final _headers = <String, String>{}
       ..addAll(this.headers)
