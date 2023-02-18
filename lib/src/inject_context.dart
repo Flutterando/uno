@@ -45,7 +45,7 @@ class InjectContext {
   static InjectContext defaultConfig() {
     final context = InjectContext();
     context
-      ..register<HttpClient>(() => HttpClient())
+      ..register<HttpClient>(HttpClient.new)
       ..register<HttpDatasource>(() => UniversalHttpClient(context()))
       ..register<HttpRepository>(() => HttpRepositoryImpl(context()))
       ..register<Fetch>(() => FetchImpl(context()));

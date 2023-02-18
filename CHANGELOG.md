@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.1.2
+
+- Remove &; 
+
+## v1.1.1
+
+- Automatic application/json or plaintext in response; 
 ## v1.1.1
 
 - Automatic application/json or plaintext in response; 

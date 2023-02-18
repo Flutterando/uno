@@ -87,7 +87,7 @@ class UniversalHttpClient implements HttpDatasource {
           }
         } else {
           unoRequest = unoRequest.copyWith(
-            responseType: ResponseType.plain,
+            responseType: ResponseType.json,
           );
         }
       }
