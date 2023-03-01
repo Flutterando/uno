@@ -148,7 +148,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> get(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -209,7 +208,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> post(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -275,7 +273,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> put(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -341,7 +338,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> delete(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -407,7 +403,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> patch(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -473,7 +468,6 @@ abstract class Uno {
   /// Aliase to `GET` method.
   Future<Response> head(
     String url, {
-
     /// Time that the server will wait for the response to the request.
     /// The connection will be interrupted if you hear timeout.
     Duration? timeout,
@@ -708,7 +702,9 @@ class _Uno implements Uno {
     ValidateCallback? validateStatus,
     dynamic data,
   }) async {
-    url = '$baseURL$url${_encodeParamsToQueries(params)}';
+    final _encodedParams = _encodeParamsToQueries(params);
+
+    url = '$baseURL$url${_encodedParams.isEmpty ? '' : '?$_encodedParams'}';
 
     final _headers = <String, String>{}
       ..addAll(this.headers)
