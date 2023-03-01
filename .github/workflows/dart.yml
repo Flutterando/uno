@@ -21,10 +21,16 @@ jobs:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.5.0'
+        flutter-version: '3.0.0'
     
     - name: get packages
       run: dart pub get
+
+    - name: Format code
+      - run: flutter format lib/
+      - run: flutter format test/
+      - run: flutter format --dry-run --set-exit-if-changed lib/
+      - run: flutter format --dry-run --set-exit-if-changed test/
     
     - name: Dart Test
       run: flutter test --coverage

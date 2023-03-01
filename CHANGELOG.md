@@ -1,15 +1,17 @@
 # Changelog
 
+## V1.1.3
+
+- Updated dependencies;
+- Updated action CI;
+
 ## v1.1.2
 
-- Remove &; 
+- Remove &;
 
 ## v1.1.1
 
-- Automatic application/json or plaintext in response; 
-## v1.1.1
-
-- Automatic application/json or plaintext in response; 
+- Automatic application/json or plaintext in response;
 
 ## v1.1.0
 
