@@ -1,5 +1,9 @@
 # Changelog
 
+## V1.1.5
+
+- Updated action CI;
+
 ## V1.1.4
 
 - fix #29
