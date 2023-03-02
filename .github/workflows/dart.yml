@@ -28,8 +28,14 @@ jobs:
 
     - name: Format code
       run: flutter format lib/
+
+    - name: Format test
       run: flutter format test/
+      
+    - name: Format exitL
       run: flutter format --dry-run --set-exit-if-changed lib/
+
+    - name: Format exitT
       run: flutter format --dry-run --set-exit-if-changed test/
     
     - name: Dart Test
