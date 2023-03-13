@@ -1,5 +1,9 @@
 # Changelog
 
+## V1.1.6
+
+- InterceptorCallback and InterceptorResolver now public;
+
 ## V1.1.5
 
 - Updated action CI;

@@ -17,7 +17,7 @@ class Interceptors {
   ///   return error;
   /// });
   /// ```
-  final request = _InterceptorCallback<Request>();
+  final request = InterceptorCallback<Request>();
 
   /// Manage response interceptors.
   ///
@@ -32,11 +32,12 @@ class Interceptors {
   ///   return error;
   /// });
   /// ```
-  final response = _InterceptorCallback<Response>();
+  final response = InterceptorCallback<Response>();
 }
 
-class _InterceptorCallback<T> {
-  final _interceptors = <_InterceptorResolver<T>>[];
+/// Organize interceptors
+class InterceptorCallback<T> {
+  final _interceptors = <InterceptorResolver<T>>[];
 
   /// Creates a new interceptor.
   /// [resolve]: Resolve request or response.
@@ -57,12 +58,12 @@ class _InterceptorCallback<T> {
   ///   return error;
   /// });
   /// ```
-  _InterceptorResolver<T> use(
+  InterceptorResolver<T> use(
     FutureOr<T> Function(T) resolve, {
     FutureOr<dynamic> Function(UnoError)? onError,
     bool Function(T)? runWhen,
   }) {
-    final interceptor = _InterceptorResolver<T>(resolve, onError, runWhen);
+    final interceptor = InterceptorResolver<T>(resolve, onError, runWhen);
     _interceptors.add(interceptor);
     return interceptor;
   }
@@ -72,7 +73,7 @@ class _InterceptorCallback<T> {
   /// final myInterceptor = uno.interceptors.request.use((request) {/*...*/});
   /// uno.interceptors.request.eject(myInterceptor);
   /// ```
-  void eject(_InterceptorResolver<T> interceptor) => _interceptors.remove(
+  void eject(InterceptorResolver<T> interceptor) => _interceptors.remove(
         interceptor,
       );
 
@@ -86,9 +87,11 @@ class _InterceptorCallback<T> {
     return data;
   }
 
+  /// only test
   @visibleForTesting
   Future<T> resolveTest(T data) => _resolve(data);
 
+  /// only test
   @visibleForTesting
   Future<dynamic> resolveErrorTest(UnoError error) => _resolveError(error);
 
@@ -105,10 +108,12 @@ class _InterceptorCallback<T> {
   }
 }
 
-class _InterceptorResolver<T> {
+/// Resolver interceptors
+class InterceptorResolver<T> {
   final FutureOr<T> Function(T) _resolve;
   final FutureOr<dynamic> Function(UnoError)? _errorResolve;
   final bool Function(T)? _runWhen;
 
-  _InterceptorResolver(this._resolve, this._errorResolve, this._runWhen);
+  /// Resolver interceptors
+  InterceptorResolver(this._resolve, this._errorResolve, this._runWhen);
 }
