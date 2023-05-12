@@ -1,5 +1,9 @@
 # Changelog
 
+## V1.1.7
+
+- Dart 3 support;
+
 ## V1.1.6
 
 - InterceptorCallback and InterceptorResolver now public;
