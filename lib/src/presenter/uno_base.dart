@@ -735,6 +735,10 @@ class _Uno implements Uno {
         }
       } else {
         value = jsonEncode(data);
+        _headers.addAll({
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+        });
       }
 
       final bytes = utf8.encode(value);

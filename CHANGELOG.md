@@ -1,5 +1,9 @@
 # Changelog
 
+## V1.1.8
+
+- Added json header;
+
 ## V1.1.7
 
 - Dart 3 support;
