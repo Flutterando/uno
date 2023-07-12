@@ -733,7 +733,9 @@ class _Uno implements Uno {
         if (contentType.contains('x-www-form-urlencoded')) {
           value = _encodeParamsToQueries(data.cast());
         }
-      } else {
+      }
+
+      if (value.isEmpty) {
         value = jsonEncode(data);
         _headers.addAll({
           'accept': 'application/json',

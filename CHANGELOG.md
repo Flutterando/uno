@@ -1,5 +1,9 @@
 # Changelog
 
+## V1.1.9
+
+- Fix: Post not add data;
+
 ## V1.1.8
 
 - Added json header;
