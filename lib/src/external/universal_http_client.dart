@@ -150,6 +150,10 @@ class UniversalHttpClient implements HttpDatasource {
           buffer.write(item);
         }
 
+        if (buffer.toString().isEmpty && responseType == ResponseType.json) {
+          return {};
+        }
+
         return jsonDecode(buffer.toString());
       } on FormatException catch (e, s) {
         throw UnoError<FormatException>(
