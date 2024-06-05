@@ -1,5 +1,9 @@
 # Changelog
 
+## V1.1.10
+
+- Fix: Return empty json when bufferString is empty / update dependencies;
+
 ## V1.1.9
 
 - Fix: Post not add data;
