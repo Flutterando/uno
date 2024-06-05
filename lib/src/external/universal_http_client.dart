@@ -150,7 +150,7 @@ class UniversalHttpClient implements HttpDatasource {
           buffer.write(item);
         }
 
-        if (buffer.toString().isEmpty) {
+        if (buffer.toString().isEmpty && responseType == ResponseType.json) {
           return {};
         }
 
