@@ -35,13 +35,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  uno: ^1.0.1+3
-  mocktail: ^0.3.0
+  uno:
+    path: ../
   mobx_triple: ^1.1.3+1
   flutter_modular: ^5.0.3
   flutter_triple: ^1.2.7+4
 
 dev_dependencies:
+  mocktail: ^1.0.3
   flutter_test:
     sdk: flutter
   integration_test:
