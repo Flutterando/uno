@@ -1,5 +1,7 @@
 # Changelog
 
+## Fix Data with List
+
 ## V1.1.10
 
 - Fix: Return empty json when bufferString is empty / update dependencies;

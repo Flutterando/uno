@@ -748,6 +748,17 @@ class _Uno implements Uno {
       myRequest = myRequest.copyWith(bodyBytes: bytes, headers: _headers);
     }
 
+    if (data is List) {
+      final value = jsonEncode(data);
+      _headers.addAll({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      });
+      final bytes = utf8.encode(value);
+      _headers.addAll({'content-length': '${bytes.length}'});
+      myRequest = myRequest.copyWith(bodyBytes: bytes, headers: _headers);
+    }
+
     if (data is String) {
       final bytes = utf8.encode(data);
       _headers.addAll({'content-length': '${bytes.length}'});
