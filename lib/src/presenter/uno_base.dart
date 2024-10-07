@@ -744,7 +744,7 @@ class _Uno implements Uno {
       }
 
       final bytes = utf8.encode(value);
-      _headers.addAll({'content-length': '${bytes.length}'});
+      _headers.addAll({'Content-Length': '${bytes.length}'});
       myRequest = myRequest.copyWith(bodyBytes: bytes, headers: _headers);
     }
 
@@ -755,13 +755,13 @@ class _Uno implements Uno {
         'Content-Type': 'application/json',
       });
       final bytes = utf8.encode(value);
-      _headers.addAll({'content-length': '${bytes.length}'});
+      _headers.addAll({'Content-Length': '${bytes.length}'});
       myRequest = myRequest.copyWith(bodyBytes: bytes, headers: _headers);
     }
 
     if (data is String) {
       final bytes = utf8.encode(data);
-      _headers.addAll({'content-length': '${bytes.length}'});
+      _headers.addAll({'Content-Length': '${bytes.length}'});
       myRequest = myRequest.copyWith(bodyBytes: bytes, headers: _headers);
     }
 

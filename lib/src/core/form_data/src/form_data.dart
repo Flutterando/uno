@@ -97,8 +97,8 @@ class FormData {
   /// Gets custom headers for multpart form.
   Map<String, String> getHeaders() {
     return {
-      'content-type': contentType,
-      'content-length': '$contentLength',
+      'Content-Type': contentType,
+      'Content-Length': '$contentLength',
     };
   }
 }
